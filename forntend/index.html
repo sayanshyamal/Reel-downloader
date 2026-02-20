@@ -1,0 +1,2204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Download Instagram Reels, Videos, Photos, Stories and IGTV online for free. Fast, easy and high quality Instagram content downloader.">
+    <title>ReelSave - Instagram Reels Downloader | Save IG Reels Online Free</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           RESET & CUSTOM PROPERTIES
+           ============================================ */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Warm sunset palette */
+            --coral: #ff6b6b;
+            --salmon: #ee5a24;
+            --tangerine: #f39c12;
+            --gold: #fdcb6e;
+            --lavender: #a29bfe;
+            --mint: #00cec9;
+            --deep-purple: #6c5ce7;
+
+            /* Backgrounds */
+            --bg-main: #fefefe;
+            --bg-warm: #fffaf5;
+            --bg-section-alt: #fef9f4;
+            --bg-card: #ffffff;
+            --bg-input: #faf8f6;
+
+            /* Text */
+            --text-heading: #1e1333;
+            --text-body: #4a4260;
+            --text-muted: #9590a8;
+            --text-light: #c4bfd6;
+
+            /* Gradients */
+            --gradient-hero: linear-gradient(160deg, #fff5ee 0%, #ffe8f0 30%, #f0e6ff 60%, #e6f0ff 100%);
+            --gradient-primary: linear-gradient(135deg, #ff6b6b, #ee5a24, #f39c12);
+            --gradient-warm: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fdfcfb 100%);
+            --gradient-card-1: linear-gradient(135deg, #fff5f5, #ffe8ec);
+            --gradient-card-2: linear-gradient(135deg, #fef9e7, #fef3cd);
+            --gradient-card-3: linear-gradient(135deg, #f0e6ff, #e8daff);
+            --gradient-card-4: linear-gradient(135deg, #e6fffa, #dff9fb);
+            --gradient-button: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 50%, #f39c12 100%);
+            --gradient-button-hover: linear-gradient(135deg, #e85d5d 0%, #d94f1f 50%, #e08e0e 100%);
+            --gradient-cta: linear-gradient(135deg, #6c5ce7, #a29bfe, #fd79a8);
+            --gradient-glow: radial-gradient(circle, rgba(255,107,107,0.12) 0%, transparent 60%);
+
+            /* Borders & Shadows */
+            --border: rgba(238, 90, 36, 0.1);
+            --border-hover: rgba(238, 90, 36, 0.25);
+            --shadow-xs: 0 1px 3px rgba(30,19,51,0.04);
+            --shadow-sm: 0 4px 12px rgba(30,19,51,0.06);
+            --shadow-md: 0 8px 30px rgba(30,19,51,0.08);
+            --shadow-lg: 0 20px 50px rgba(30,19,51,0.1);
+            --shadow-xl: 0 30px 70px rgba(30,19,51,0.12);
+            --shadow-btn: 0 8px 25px rgba(238,90,36,0.3);
+            --shadow-btn-hover: 0 14px 40px rgba(238,90,36,0.4);
+
+            /* Radius */
+            --r-sm: 12px;
+            --r-md: 18px;
+            --r-lg: 24px;
+            --r-xl: 32px;
+            --r-full: 100px;
+
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --max-w: 1180px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-main);
+            color: var(--text-body);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        .container {
+            max-width: var(--max-w);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .gradient-text {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ============================================
+           FLOATING SHAPES (Background decoration)
+           ============================================ */
+        .bg-shapes {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+        }
+
+        .shape-1 {
+            width: 450px; height: 450px;
+            background: rgba(255,107,107,0.08);
+            top: -5%; right: -5%;
+            animation: floatShape 18s ease-in-out infinite;
+        }
+
+        .shape-2 {
+            width: 380px; height: 380px;
+            background: rgba(162,155,254,0.08);
+            top: 35%; left: -8%;
+            animation: floatShape 22s ease-in-out infinite reverse;
+        }
+
+        .shape-3 {
+            width: 300px; height: 300px;
+            background: rgba(243,156,18,0.06);
+            bottom: 5%; right: 10%;
+            animation: floatShape 20s ease-in-out infinite;
+            animation-delay: -6s;
+        }
+
+        @keyframes floatShape {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -40px) scale(1.05); }
+            66% { transform: translate(-25px, 30px) scale(0.95); }
+        }
+
+        /* ============================================
+           NAVBAR
+           ============================================ */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255,255,255,0.88);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 72px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 900;
+            font-size: 1.45rem;
+            color: var(--text-heading);
+        }
+
+        .logo-mark {
+            width: 42px;
+            height: 42px;
+            background: var(--gradient-primary);
+            border-radius: 14px;
+            display: grid;
+            place-items: center;
+            box-shadow: 0 4px 15px rgba(238,90,36,0.25);
+            transition: var(--transition);
+        }
+
+        .logo:hover .logo-mark {
+            transform: rotate(-8deg) scale(1.05);
+        }
+
+        .logo-mark svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-menu a {
+            padding: 10px 20px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--text-body);
+            border-radius: var(--r-full);
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover {
+            color: var(--salmon);
+            background: rgba(238,90,36,0.06);
+        }
+
+        .nav-menu .nav-cta {
+            background: var(--gradient-button);
+            color: white !important;
+            padding: 10px 24px;
+            box-shadow: var(--shadow-btn);
+            margin-left: 8px;
+        }
+
+        .nav-menu .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-btn-hover);
+            background: var(--gradient-button-hover);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+            background: none;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .hamburger span {
+            width: 24px;
+            height: 2.5px;
+            background: var(--text-heading);
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        .hamburger.open span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 6px);
+        }
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+        .hamburger.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -6px);
+        }
+
+        /* ============================================
+           AD BANNERS
+           Container for Google AdSense. Replace inner
+           content with your <ins> + <script> tags.
+           ============================================ */
+        .ad-container {
+            display: flex;
+            justify-content: center;
+            padding: 16px 24px;
+        }
+
+        .ad-slot {
+            width: 100%;
+            max-width: 728px;
+            min-height: 90px;
+            background: linear-gradient(135deg, #fef9f4, #fef5ee, #fff0f6);
+            border: 2px dashed rgba(238,90,36,0.15);
+            border-radius: var(--r-sm);
+            display: grid;
+            place-items: center;
+            color: var(--text-light);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* ============================================
+           HERO SECTION
+           ============================================ */
+        .hero {
+            background: var(--gradient-hero);
+            padding: 80px 24px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(to top, var(--bg-main), transparent);
+        }
+
+        /* Floating emojis */
+        .float-emoji {
+            position: absolute;
+            font-size: 2rem;
+            pointer-events: none;
+            opacity: 0.4;
+            animation: emojiDrift 8s ease-in-out infinite;
+        }
+
+        .float-emoji:nth-child(1) { top: 10%; left: 8%; animation-delay: 0s; font-size: 1.8rem; }
+        .float-emoji:nth-child(2) { top: 15%; right: 10%; animation-delay: -2s; font-size: 2.2rem; }
+        .float-emoji:nth-child(3) { bottom: 25%; left: 5%; animation-delay: -4s; font-size: 1.6rem; }
+        .float-emoji:nth-child(4) { bottom: 20%; right: 8%; animation-delay: -6s; font-size: 2rem; }
+        .float-emoji:nth-child(5) { top: 45%; left: 15%; animation-delay: -1s; font-size: 1.4rem; }
+
+        @keyframes emojiDrift {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+            25% { transform: translateY(-20px) rotate(10deg); opacity: 0.5; }
+            50% { transform: translateY(-8px) rotate(-5deg); opacity: 0.4; }
+            75% { transform: translateY(-25px) rotate(8deg); opacity: 0.6; }
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--r-full);
+            padding: 8px 22px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--salmon);
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .chip-pulse {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #00b894;
+            position: relative;
+        }
+
+        .chip-pulse::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            border: 2px solid rgba(0,184,148,0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.4rem, 6.5vw, 4rem);
+            font-weight: 900;
+            color: var(--text-heading);
+            line-height: 1.1;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+        }
+
+        .hero-desc {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: var(--text-body);
+            max-width: 560px;
+            margin: 0 auto 44px;
+            font-weight: 400;
+        }
+
+        /* URL Input Form */
+        .search-box {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .search-form {
+            display: flex;
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: var(--r-full);
+            padding: 7px;
+            box-shadow: var(--shadow-md), 0 0 60px rgba(255,107,107,0.06);
+            transition: var(--transition);
+        }
+
+        .search-form:focus-within {
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow-lg), 0 0 80px rgba(238,90,36,0.08);
+            transform: translateY(-2px);
+        }
+
+        .search-form input {
+            flex: 1;
+            padding: 18px 28px;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-heading);
+            min-width: 0;
+        }
+
+        .search-form input::placeholder {
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        .search-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 40px;
+            background: var(--gradient-button);
+            background-size: 200% 200%;
+            color: white;
+            border: none;
+            border-radius: var(--r-full);
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: var(--shadow-btn);
+            transition: var(--transition);
+            animation: shimmer 5s ease infinite;
+        }
+
+        @keyframes shimmer {
+            0%,100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .search-btn:hover {
+            transform: scale(1.03);
+            box-shadow: var(--shadow-btn-hover);
+        }
+
+        .search-btn:active { transform: scale(0.97); }
+
+        .search-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .search-btn svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        /* Error */
+        .form-error {
+            color: #e74c3c;
+            font-size: 0.88rem;
+            font-weight: 600;
+            margin-top: 14px;
+            display: none;
+        }
+
+        .form-error.visible {
+            display: block;
+            animation: shakeError 0.4s ease;
+        }
+
+        @keyframes shakeError {
+            0%,100% { transform: translateX(0); }
+            20% { transform: translateX(-8px); }
+            40% { transform: translateX(8px); }
+            60% { transform: translateX(-5px); }
+            80% { transform: translateX(5px); }
+        }
+
+        /* Format badges */
+        .format-list {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 28px;
+            flex-wrap: wrap;
+        }
+
+        .format-tag {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--r-full);
+            padding: 7px 18px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: var(--shadow-xs);
+            transition: var(--transition);
+            cursor: default;
+        }
+
+        .format-tag:hover {
+            border-color: var(--border-hover);
+            color: var(--salmon);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* ============================================
+           RESULT AREA
+           ============================================ */
+        .result-wrapper {
+            max-width: 720px;
+            margin: 40px auto 0;
+            display: none;
+        }
+
+        .result-wrapper.active { display: block; animation: popUp 0.5s var(--bounce); }
+
+        @keyframes popUp {
+            from { opacity: 0; transform: translateY(30px) scale(0.97); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .spinner-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+            padding: 55px;
+        }
+
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid rgba(238,90,36,0.15);
+            border-top-color: var(--coral);
+            border-right-color: var(--salmon);
+            border-radius: 50%;
+            animation: spin 0.65s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .spinner-text {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .download-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: var(--r-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            display: none;
+        }
+
+        .download-card.visible {
+            display: block;
+            animation: popUp 0.5s var(--bounce);
+        }
+
+        .download-card-body {
+            display: flex;
+            gap: 24px;
+            padding: 24px;
+            align-items: center;
+        }
+
+        .thumb-wrap {
+            width: 200px;
+            height: 220px;
+            border-radius: var(--r-md);
+            overflow: hidden;
+            flex-shrink: 0;
+            position: relative;
+            background: var(--gradient-card-1);
+        }
+
+        .thumb-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .thumb-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.15);
+            display: grid;
+            place-items: center;
+            transition: var(--transition);
+        }
+
+        .thumb-wrap:hover .thumb-overlay {
+            background: rgba(0,0,0,0.3);
+        }
+
+        .thumb-play {
+            width: 56px;
+            height: 56px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            transition: var(--transition);
+        }
+
+        .thumb-wrap:hover .thumb-play {
+            transform: scale(1.12);
+        }
+
+        .thumb-play svg {
+            width: 22px;
+            height: 22px;
+            fill: var(--text-heading);
+            margin-left: 3px;
+        }
+
+        .file-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .file-info h3 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--text-heading);
+            margin-bottom: 6px;
+        }
+
+        .file-info .file-desc {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+
+        .file-tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 22px;
+            flex-wrap: wrap;
+        }
+
+        .file-tags span {
+            font-size: 0.76rem;
+            font-weight: 700;
+            padding: 5px 14px;
+            border-radius: var(--r-full);
+            border: 1px solid;
+        }
+
+        .file-tags .tag-format {
+            color: var(--salmon);
+            background: rgba(238,90,36,0.06);
+            border-color: rgba(238,90,36,0.15);
+        }
+
+        .file-tags .tag-quality {
+            color: var(--deep-purple);
+            background: rgba(108,92,231,0.06);
+            border-color: rgba(108,92,231,0.15);
+        }
+
+        .file-tags .tag-size {
+            color: var(--mint);
+            background: rgba(0,206,201,0.06);
+            border-color: rgba(0,206,201,0.15);
+        }
+
+        .save-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            background: var(--gradient-button);
+            background-size: 200% 200%;
+            color: white;
+            border: none;
+            border-radius: var(--r-full);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: var(--shadow-btn);
+            transition: var(--transition);
+            animation: shimmer 5s ease infinite;
+        }
+
+        .save-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-btn-hover);
+        }
+
+        .save-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* ============================================
+           TRUST BAR
+           ============================================ */
+        .trust-bar {
+            padding: 56px 24px;
+            background: var(--bg-card);
+            border-top: 1px solid rgba(0,0,0,0.04);
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .trust-item {
+            text-align: center;
+            padding: 16px;
+            border-radius: var(--r-md);
+            transition: var(--transition);
+        }
+
+        .trust-item:hover {
+            background: var(--bg-warm);
+            transform: translateY(-4px);
+        }
+
+        .trust-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .trust-number {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--text-heading);
+            letter-spacing: -1px;
+        }
+
+        .trust-label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 2px;
+        }
+
+        /* ============================================
+           CONTENT SECTION: About / Description
+           ============================================ */
+        .about-section {
+            padding: 80px 24px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .about-visual {
+            position: relative;
+        }
+
+        .about-mockup {
+            width: 100%;
+            max-width: 380px;
+            margin: 0 auto;
+            background: var(--gradient-hero);
+            border-radius: var(--r-xl);
+            padding: 40px 30px;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--border);
+        }
+
+        .mockup-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .mockup-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: grid;
+            place-items: center;
+            font-size: 1.2rem;
+        }
+
+        .mockup-user {
+            font-weight: 800;
+            font-size: 0.92rem;
+            color: var(--text-heading);
+        }
+
+        .mockup-handle {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .mockup-video {
+            width: 100%;
+            aspect-ratio: 9/12;
+            background: linear-gradient(135deg, #ffecd2, #fcb69f);
+            border-radius: var(--r-md);
+            display: grid;
+            place-items: center;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mockup-video::before {
+            content: '▶';
+            font-size: 3rem;
+            color: white;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .mockup-actions {
+            display: flex;
+            gap: 20px;
+        }
+
+        .mockup-actions span {
+            font-size: 1.4rem;
+            cursor: default;
+        }
+
+        .about-text h2 {
+            font-size: clamp(1.8rem, 4vw, 2.4rem);
+            font-weight: 900;
+            color: var(--text-heading);
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+            line-height: 1.2;
+        }
+
+        .about-text p {
+            font-size: 1rem;
+            color: var(--text-body);
+            margin-bottom: 16px;
+            line-height: 1.8;
+        }
+
+        .about-text ul {
+            margin-top: 16px;
+        }
+
+        .about-text ul li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-heading);
+        }
+
+        .about-text ul li .check-icon {
+            width: 28px;
+            height: 28px;
+            background: rgba(0,184,148,0.1);
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+        }
+
+        .about-text ul li .check-icon svg {
+            width: 14px;
+            height: 14px;
+            stroke: #00b894;
+            stroke-width: 3;
+            fill: none;
+        }
+
+        /* ============================================
+           FEATURES SECTION
+           ============================================ */
+        .features {
+            padding: 90px 24px;
+            background: var(--bg-section-alt);
+        }
+
+        .section-top {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.82rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            margin-bottom: 14px;
+            padding: 7px 18px;
+            border-radius: var(--r-full);
+        }
+
+        .badge-coral {
+            color: var(--salmon);
+            background: rgba(238,90,36,0.08);
+        }
+
+        .badge-purple {
+            color: var(--deep-purple);
+            background: rgba(108,92,231,0.08);
+        }
+
+        .badge-mint {
+            color: var(--mint);
+            background: rgba(0,206,201,0.08);
+        }
+
+        .section-top h2 {
+            font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+            font-weight: 900;
+            color: var(--text-heading);
+            letter-spacing: -1.5px;
+            margin-bottom: 14px;
+            line-height: 1.15;
+        }
+
+        .section-top p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .feat-card {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border);
+            border-radius: var(--r-lg);
+            padding: 36px 24px;
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feat-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            border-radius: 0 0 4px 4px;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .feat-card:nth-child(1)::after { background: var(--gradient-primary); }
+        .feat-card:nth-child(2)::after { background: linear-gradient(135deg, #f39c12, #fdcb6e); }
+        .feat-card:nth-child(3)::after { background: linear-gradient(135deg, #6c5ce7, #a29bfe); }
+        .feat-card:nth-child(4)::after { background: linear-gradient(135deg, #00cec9, #55efc4); }
+
+        .feat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+            border-color: transparent;
+        }
+
+        .feat-card:hover::after { opacity: 1; }
+
+        .feat-icon {
+            width: 76px;
+            height: 76px;
+            margin: 0 auto 22px;
+            border-radius: 22px;
+            display: grid;
+            place-items: center;
+        }
+
+        .feat-card:nth-child(1) .feat-icon { background: var(--gradient-card-1); }
+        .feat-card:nth-child(2) .feat-icon { background: var(--gradient-card-2); }
+        .feat-card:nth-child(3) .feat-icon { background: var(--gradient-card-3); }
+        .feat-card:nth-child(4) .feat-icon { background: var(--gradient-card-4); }
+
+        .feat-icon svg {
+            width: 30px;
+            height: 30px;
+        }
+
+        .feat-card h3 {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--text-heading);
+            margin-bottom: 10px;
+        }
+
+        .feat-card p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+        }
+
+        /* ============================================
+           HOW IT WORKS
+           ============================================ */
+        .how-it-works {
+            padding: 90px 24px;
+        }
+
+        .steps-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            max-width: 960px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Connector line */
+        .steps-row::before {
+            content: '';
+            position: absolute;
+            top: 72px;
+            left: 18%;
+            right: 18%;
+            height: 4px;
+            background: var(--gradient-primary);
+            border-radius: 4px;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .step {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border);
+            border-radius: var(--r-lg);
+            padding: 44px 28px 36px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .step:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .step-badge {
+            width: 56px;
+            height: 56px;
+            background: var(--gradient-button);
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: white;
+            margin: 0 auto 24px;
+            box-shadow: var(--shadow-btn);
+            position: relative;
+        }
+
+        .step-badge::after {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border-radius: 50%;
+            border: 2px solid rgba(238,90,36,0.15);
+        }
+
+        .step-visual {
+            font-size: 3rem;
+            margin-bottom: 18px;
+            display: block;
+        }
+
+        .step h3 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--text-heading);
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+        }
+
+        /* ============================================
+           SUPPORTED CONTENT TYPES
+           ============================================ */
+        .content-types {
+            padding: 90px 24px;
+            background: var(--bg-section-alt);
+        }
+
+        .types-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .type-card {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border);
+            border-radius: var(--r-lg);
+            padding: 32px 16px;
+            text-align: center;
+            transition: var(--transition);
+            cursor: default;
+        }
+
+        .type-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--border-hover);
+        }
+
+        .type-emoji {
+            font-size: 2.6rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .type-card h4 {
+            font-size: 0.92rem;
+            font-weight: 800;
+            color: var(--text-heading);
+            margin-bottom: 4px;
+        }
+
+        .type-card p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* ============================================
+           FAQ SECTION
+           ============================================ */
+        .faq-section {
+            padding: 90px 24px;
+        }
+
+        .faq-wrapper {
+            max-width: 780px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border);
+            border-radius: var(--r-md);
+            margin-bottom: 14px;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--shadow-xs);
+        }
+
+        .faq-item:hover {
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow-md);
+        }
+
+        .faq-item.open {
+            border-color: rgba(238,90,36,0.3);
+            box-shadow: var(--shadow-md), 0 0 30px rgba(238,90,36,0.04);
+        }
+
+        .faq-trigger {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 22px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-heading);
+            text-align: left;
+            gap: 16px;
+            transition: var(--transition);
+        }
+
+        .faq-trigger:hover { color: var(--salmon); }
+
+        .faq-arrow {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            transition: var(--transition);
+            background: rgba(238,90,36,0.06);
+        }
+
+        .faq-item.open .faq-arrow {
+            background: var(--gradient-button);
+            transform: rotate(180deg);
+        }
+
+        .faq-arrow svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--salmon);
+            stroke-width: 2.5;
+            fill: none;
+        }
+
+        .faq-item.open .faq-arrow svg {
+            stroke: white;
+        }
+
+        .faq-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .faq-item.open .faq-body {
+            max-height: 350px;
+        }
+
+        .faq-body-inner {
+            padding: 0 28px 24px;
+            font-size: 0.93rem;
+            color: var(--text-body);
+            line-height: 1.85;
+        }
+
+        /* ============================================
+           CTA BANNER
+           ============================================ */
+        .cta-banner {
+            padding: 80px 24px;
+        }
+
+        .cta-box {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--gradient-cta);
+            border-radius: var(--r-xl);
+            padding: 70px 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(108,92,231,0.2);
+        }
+
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: -40%; right: -20%;
+            width: 400px; height: 400px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 50%;
+        }
+
+        .cta-box::after {
+            content: '';
+            position: absolute;
+            bottom: -30%; left: -15%;
+            width: 350px; height: 350px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 50%;
+        }
+
+        .cta-box h2 {
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            font-weight: 900;
+            color: white;
+            margin-bottom: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-box p {
+            color: rgba(255,255,255,0.85);
+            font-size: 1.1rem;
+            margin-bottom: 32px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 40px;
+            background: white;
+            color: var(--deep-purple);
+            border: none;
+            border-radius: var(--r-full);
+            font-family: inherit;
+            font-size: 1.05rem;
+            font-weight: 900;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-action:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 14px 40px rgba(0,0,0,0.2);
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .site-footer {
+            background: var(--bg-card);
+            border-top: 1px solid rgba(0,0,0,0.05);
+            padding: 50px 24px 40px;
+        }
+
+        .footer-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer-brand {
+            font-size: 1.4rem;
+            font-weight: 900;
+        }
+
+        .footer-tagline {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-align: center;
+            max-width: 380px;
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 28px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-nav a {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+
+        .footer-nav a:hover { color: var(--salmon); }
+
+        .footer-line {
+            width: 100%;
+            max-width: 350px;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .footer-copy {
+            font-size: 0.82rem;
+            color: var(--text-light);
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 1024px) {
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .types-grid { grid-template-columns: repeat(3, 1fr); }
+            .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .about-visual { order: -1; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 72px; left: 0; right: 0;
+                background: rgba(255,255,255,0.98);
+                backdrop-filter: blur(24px);
+                flex-direction: column;
+                padding: 20px;
+                gap: 6px;
+                border-bottom: 1px solid var(--border);
+                transform: translateY(-130%);
+                opacity: 0;
+                transition: var(--transition);
+                pointer-events: none;
+                box-shadow: var(--shadow-lg);
+            }
+
+            .nav-menu.open {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: all;
+            }
+
+            .nav-menu a {
+                width: 100%;
+                text-align: center;
+                padding: 14px;
+                border-radius: var(--r-sm);
+            }
+
+            .nav-menu .nav-cta {
+                margin-left: 0;
+                margin-top: 8px;
+            }
+
+            .hamburger { display: flex; }
+
+            .hero { padding: 50px 20px 45px; }
+
+            .search-form {
+                flex-direction: column;
+                border-radius: var(--r-lg);
+                padding: 8px;
+            }
+
+            .search-form input {
+                padding: 16px 20px;
+                text-align: center;
+            }
+
+            .search-btn {
+                border-radius: var(--r-sm);
+                justify-content: center;
+                padding: 16px;
+            }
+
+            .features-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+
+            .steps-row {
+                grid-template-columns: 1fr;
+                max-width: 420px;
+            }
+
+            .steps-row::before { display: none; }
+
+            .types-grid {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 360px;
+                margin: 0 auto;
+            }
+
+            .download-card-body {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .thumb-wrap {
+                width: 100%;
+                max-width: 280px;
+                height: 240px;
+            }
+
+            .file-tags { justify-content: center; }
+
+            .trust-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+
+            .ad-slot { min-height: 70px; }
+
+            .float-emoji { display: none; }
+
+            .cta-box { padding: 50px 28px; }
+
+            .about-mockup { max-width: 300px; padding: 28px 20px; }
+        }
+
+        @media (max-width: 480px) {
+            .navbar .container { height: 62px; }
+            .logo { font-size: 1.25rem; }
+            .logo-mark { width: 36px; height: 36px; border-radius: 11px; }
+            .logo-mark svg { width: 18px; height: 18px; }
+
+            .hero h1 { font-size: 1.9rem; letter-spacing: -1px; }
+            .hero-desc { font-size: 0.92rem; }
+            .hero-chip { font-size: 0.78rem; padding: 6px 16px; }
+
+            .section-top h2 { font-size: 1.45rem; }
+
+            .feat-card { padding: 28px 20px; }
+            .feat-icon { width: 64px; height: 64px; }
+
+            .faq-trigger { padding: 18px 20px; font-size: 0.92rem; }
+            .faq-body-inner { padding: 0 20px 18px; font-size: 0.87rem; }
+
+            .trust-number { font-size: 1.3rem; }
+            .trust-label { font-size: 0.7rem; }
+
+            .types-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .type-card { padding: 24px 12px; }
+            .type-emoji { font-size: 2rem; }
+
+            .cta-box h2 { font-size: 1.4rem; }
+            .cta-action { padding: 14px 28px; font-size: 0.95rem; }
+
+            .about-text h2 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Decoration -->
+    <div class="bg-shapes" aria-hidden="true">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <!-- ============================================
+         NAVBAR
+         ============================================ -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <a href="#" class="logo" aria-label="ReelSave Home">
+                <span class="logo-mark">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="7 10 12 15 17 10"/>
+                        <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                </span>
+                <span class="gradient-text">ReelSave</span>
+            </a>
+
+            <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-to">How It Works</a></li>
+                <li><a href="#types">Supported</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#hero" class="nav-cta">Try Now</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ============================================
+         AD BANNER 1 — Top (728×90)
+         Replace inner content with your AdSense code:
+         <ins class="adsbygoogle" ...></ins>
+         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+         ============================================ -->
+    <div class="ad-container" aria-label="Advertisement">
+        <div class="ad-slot">
+            <!-- ADSENSE SLOT 1 — Paste code here -->
+            Ad Space — 728 × 90
+        </div>
+    </div>
+
+    <!-- ============================================
+         HERO SECTION
+         ============================================ -->
+    <section class="hero" id="hero">
+        <span class="float-emoji" aria-hidden="true">🎬</span>
+        <span class="float-emoji" aria-hidden="true">📱</span>
+        <span class="float-emoji" aria-hidden="true">✨</span>
+        <span class="float-emoji" aria-hidden="true">🎵</span>
+        <span class="float-emoji" aria-hidden="true">💜</span>
+
+        <div class="container">
+            <div class="hero-chip">
+                <span class="chip-pulse"></span>
+                Online &amp; Free — No App Needed
+            </div>
+
+            <h1>Instagram <span class="gradient-text">Reels</span><br>Downloader</h1>
+
+            <p class="hero-desc">Download Instagram Reels, Videos, Photos, Stories and IGTV content online — high quality, no watermark, unlimited.</p>
+
+            <div class="search-box">
+                <form class="search-form" id="dlForm" autocomplete="off">
+                    <input type="url" id="linkInput" placeholder="Paste Instagram Reel or Video URL..." aria-label="Instagram URL" required>
+                    <button type="submit" class="search-btn" id="searchBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        Download
+                    </button>
+                </form>
+                <p class="form-error" id="formError">⚠️ Enter a valid Instagram URL (e.g., instagram.com/reel/...)</p>
+            </div>
+
+            <div class="format-list">
+                <span class="format-tag"><span class="badge-emoji">🎬</span> Reels</span>
+                <span class="format-tag"><span class="badge-emoji">📹</span> Videos</span>
+                <span class="format-tag"><span class="badge-emoji">📸</span> Photos</span>
+                <span class="format-tag"><span class="badge-emoji">📖</span> Stories</span>
+                <span class="format-tag"><span class="badge-emoji">📺</span> IGTV</span>
+            </div>
+
+            <!-- Result Area -->
+            <div class="result-wrapper" id="resultWrapper">
+                <div class="spinner-box" id="spinnerBox">
+                    <div class="spinner"></div>
+                    <p class="spinner-text">Processing your reel...</p>
+                </div>
+
+                <div class="download-card" id="downloadCard">
+                    <div class="download-card-body">
+                        <div class="thumb-wrap">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='480'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23ffecd2'/%3E%3Cstop offset='100%25' stop-color='%23fcb69f'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='480' fill='url(%23g)'/%3E%3Ctext x='200' y='220' text-anchor='middle' font-family='Arial' font-size='64' fill='white' opacity='0.7'%3E🎞️%3C/text%3E%3Ctext x='200' y='280' text-anchor='middle' font-family='Arial' font-size='16' fill='white' opacity='0.5'%3EVideo Preview%3C/text%3E%3C/svg%3E" alt="Video Thumbnail" loading="lazy">
+                            <div class="thumb-overlay">
+                                <div class="thumb-play">
+                                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="file-info">
+                            <h3>instagram_reel_2024.mp4</h3>
+                            <p class="file-desc">Your reel is ready to download!</p>
+                            <div class="file-tags">
+                                <span class="tag-format">MP4</span>
+                                <span class="tag-quality">1080p HD</span>
+                                <span class="tag-size">8.7 MB</span>
+                            </div>
+                            <button class="save-btn" onclick="alert('In production, this triggers the real file download.')">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="7 10 12 15 17 10"/>
+                                    <line x1="12" y1="15" x2="12" y2="3"/>
+                                </svg>
+                                Save to Device
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         AD BANNER 2 — After Result
+         ============================================ -->
+    <div class="ad-container" aria-label="Advertisement">
+        <div class="ad-slot">
+            <!-- ADSENSE SLOT 2 — Paste code here -->
+            Ad Space — Responsive
+        </div>
+    </div>
+
+    <!-- ============================================
+         TRUST BAR
+         ============================================ -->
+    <section class="trust-bar">
+        <div class="container">
+            <div class="trust-grid">
+                <div class="trust-item">
+                    <div class="trust-icon">🚀</div>
+                    <div class="trust-number gradient-text">15M+</div>
+                    <div class="trust-label">Reels Saved</div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">⭐</div>
+                    <div class="trust-number gradient-text">4.9/5</div>
+                    <div class="trust-label">User Rating</div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">🌍</div>
+                    <div class="trust-number gradient-text">180+</div>
+                    <div class="trust-label">Countries</div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">⚡</div>
+                    <div class="trust-number gradient-text">&lt;3s</div>
+                    <div class="trust-label">Avg. Speed</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         ABOUT SECTION
+         ============================================ -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-visual">
+                    <div class="about-mockup">
+                        <div class="mockup-header">
+                            <div class="mockup-avatar">📸</div>
+                            <div>
+                                <div class="mockup-user">creator_studio</div>
+                                <div class="mockup-handle">@creator_studio • Reel</div>
+                            </div>
+                        </div>
+                        <div class="mockup-video"></div>
+                        <div class="mockup-actions">
+                            <span>❤️</span>
+                            <span>💬</span>
+                            <span>📤</span>
+                            <span>🔖</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h2>What is <span class="gradient-text">ReelSave</span> Instagram Downloader?</h2>
+                    <p>ReelSave is a fast, free online tool designed to help you download and save Instagram Reels, videos, photos, stories and IGTV content directly to your device.</p>
+                    <p>Whether you want to save a funny reel, an inspiring video, or a beautiful photo — ReelSave makes it effortless. No registration, no app installation, no limits.</p>
+                    <ul>
+                        <li>
+                            <span class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            Full HD quality — up to 1080p
+                        </li>
+                        <li>
+                            <span class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            No watermark on downloaded content
+                        </li>
+                        <li>
+                            <span class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            Works on all devices & browsers
+                        </li>
+                        <li>
+                            <span class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            Unlimited downloads, forever free
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FEATURES SECTION
+         ============================================ -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-top">
+                <span class="section-badge badge-coral">🔥 Features</span>
+                <h2>Why <span class="gradient-text">Millions</span> Choose ReelSave</h2>
+                <p>The most reliable Instagram downloader with features you'll love.</p>
+            </div>
+
+            <div class="features-grid">
+                <article class="feat-card">
+                    <div class="feat-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#ee5a24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                    </div>
+                    <h3>Original Quality</h3>
+                    <p>Download reels and videos in their original HD resolution — up to 1080p, no compression applied.</p>
+                </article>
+
+                <article class="feat-card">
+                    <div class="feat-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#f39c12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <h3>Blazing Fast</h3>
+                    <p>Our optimized servers process your download in under 3 seconds. No delays, no waiting around.</p>
+                </article>
+
+                <article class="feat-card">
+                    <div class="feat-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#6c5ce7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <polyline points="9 12 11 14 15 10"/>
+                        </svg>
+                    </div>
+                    <h3>Clean & Safe</h3>
+                    <p>No watermarks, no malware, no popups. Just clean downloads you can trust, every single time.</p>
+                </article>
+
+                <article class="feat-card">
+                    <div class="feat-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#00cec9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                            <line x1="12" y1="18" x2="12.01" y2="18"/>
+                        </svg>
+                    </div>
+                    <h3>Universal</h3>
+                    <p>Works on iPhone, Android, iPad, Windows, Mac — any device with a modern web browser.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         HOW IT WORKS SECTION
+         ============================================ -->
+    <section class="how-it-works" id="how-to">
+        <div class="container">
+            <div class="section-top">
+                <span class="section-badge badge-purple">📋 Guide</span>
+                <h2>Download Reels in <span class="gradient-text">3 Steps</span></h2>
+                <p>It couldn't be easier. Here's how it works.</p>
+            </div>
+
+            <div class="steps-row">
+                <article class="step">
+                    <div class="step-badge">1</div>
+                    <span class="step-visual">🔗</span>
+                    <h3>Copy the Reel Link</h3>
+                    <p>Open Instagram, tap the three dots (⋯) on any reel or video, then tap "Copy Link" to clipboard.</p>
+                </article>
+
+                <article class="step">
+                    <div class="step-badge">2</div>
+                    <span class="step-visual">📋</span>
+                    <h3>Paste URL Here</h3>
+                    <p>Come back to ReelSave and paste the copied Instagram URL into the download box above.</p>
+                </article>
+
+                <article class="step">
+                    <div class="step-badge">3</div>
+                    <span class="step-visual">💾</span>
+                    <h3>Save to Device</h3>
+                    <p>Click Download and your reel will be saved directly to your phone, tablet, or computer.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         SUPPORTED CONTENT TYPES
+         ============================================ -->
+    <section class="content-types" id="types">
+        <div class="container">
+            <div class="section-top">
+                <span class="section-badge badge-mint">📦 Supported</span>
+                <h2>All Instagram <span class="gradient-text">Content Types</span></h2>
+                <p>ReelSave supports every type of Instagram content.</p>
+            </div>
+
+            <div class="types-grid">
+                <div class="type-card">
+                    <span class="type-emoji">🎞️</span>
+                    <h4>Reels</h4>
+                    <p>Short videos</p>
+                </div>
+                <div class="type-card">
+                    <span class="type-emoji">📹</span>
+                    <h4>Videos</h4>
+                    <p>Feed videos</p>
+                </div>
+                <div class="type-card">
+                    <span class="type-emoji">📸</span>
+                    <h4>Photos</h4>
+                    <p>Single & carousel</p>
+                </div>
+                <div class="type-card">
+                    <span class="type-emoji">📖</span>
+                    <h4>Stories</h4>
+                    <p>24hr content</p>
+                </div>
+                <div class="type-card">
+                    <span class="type-emoji">📺</span>
+                    <h4>IGTV</h4>
+                    <p>Long-form video</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         AD BANNER 3 — Before FAQ
+         ============================================ -->
+    <div class="ad-container" aria-label="Advertisement">
+        <div class="ad-slot">
+            <!-- ADSENSE SLOT 3 — Paste code here -->
+            Ad Space — Responsive
+        </div>
+    </div>
+
+    <!-- ============================================
+         FAQ SECTION
+         ============================================ -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <div class="section-top">
+                <span class="section-badge badge-coral">💡 FAQ</span>
+                <h2>Frequently Asked <span class="gradient-text">Questions</span></h2>
+                <p>Quick answers to the most common questions.</p>
+            </div>
+
+            <div class="faq-wrapper">
+                <div class="faq-item">
+                    <button class="faq-trigger" aria-expanded="false">
+                        <span>What is an Instagram Reels Downloader?</span>
+                        <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+                    </button>
+                    <div class="faq-body"><div class="faq-body-inner">
+                        An Instagram Reels Downloader is a free online tool that lets you save Instagram Reels, videos, photos, and stories directly to your device. Simply paste the link to any public Instagram content, and ReelSave will process it and provide a direct download link — no software installation required.
+                    </div></div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-trigger" aria-expanded="false">
+                        <span>Is ReelSave really free to use?</span>
+                        <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+                    </button>
+                    <div class="faq-body"><div class="faq-body-inner">
+                        Yes, ReelSave is completely free! There are no hidden charges, no premium tiers, no subscription fees, and no download limits. You can download as many Instagram reels and videos as you want, whenever you want — all at no cost.
+                    </div></div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-trigger" aria-expanded="false">
+                        <span>Where are downloaded files saved on my device?</span>
+                        <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+                    </button>
+                    <div class="faq-body"><div class="faq-body-inner">
+                        On desktop computers, files are saved to your browser's default "Downloads" folder. On Android, check the Downloads folder or your Gallery app. On iPhone/iPad, files are saved to the Files app or your Photos library depending on your browser settings.
+                    </div></div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-trigger" aria-expanded="false">
+                        <span>Can I download Reels from private Instagram accounts?</span>
+                        <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+                    </button>
+                    <div class="faq-body"><div class="faq-body-inner">
+                        No. ReelSave can only download content from public Instagram accounts. Private account content is protected by Instagram's privacy settings and cannot be accessed by any third-party tool. We respect user privacy at all times.
+                    </div></div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-trigger" aria-expanded="false">
+                        <span>Do I need to create an account or install an app?</span>
+                        <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+                    </button>
+                    <div class="faq-body"><div class="faq-body-inner">
+                        No account registration and no app installation needed! ReelSave works 100% in your web browser. Just visit our website, paste your Instagram link, and hit download. It's that simple — works on every device.
+                    </div></div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-trigger" aria-expanded="false">
+                        <span>Is downloading Instagram Reels legal?</span>
+                        <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+                    </button>
+                    <div class="faq-body"><div class="faq-body-inner">
+                        Downloading Instagram content for personal, offline viewing is generally acceptable. However, you should always respect the original creator's copyright and intellectual property. Never re-upload, redistribute, or use downloaded content commercially without the creator's explicit permission.
+                    </div></div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-trigger" aria-expanded="false">
+                        <span>What video quality can I download?</span>
+                        <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+                    </button>
+                    <div class="faq-body"><div class="faq-body-inner">
+                        ReelSave downloads Instagram content in the highest available quality — typically 1080p Full HD for videos and reels. The exact quality depends on the original upload quality set by the content creator. We never compress or reduce the quality of your downloads.
+                    </div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CTA BANNER
+         ============================================ -->
+    <section class="cta-banner">
+        <div class="container">
+            <div class="cta-box">
+                <h2>Ready to Save Your Favorite Reels?</h2>
+                <p>Start downloading Instagram Reels in seconds — free, fast, and unlimited.</p>
+                <button class="cta-action" id="ctaBtn">
+                    🚀 Start Downloading Now
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-inner">
+                <span class="footer-brand gradient-text">ReelSave</span>
+                <p class="footer-tagline">The fastest free Instagram Reels downloader. Save videos, photos, stories, and IGTV with one click.</p>
+                <nav class="footer-nav" aria-label="Footer">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Contact</a>
+                    <a href="#">DMCA</a>
+                </nav>
+                <div class="footer-line"></div>
+                <p class="footer-copy">&copy; <span id="year"></span> ReelSave. All rights reserved. Not affiliated with Instagram or Meta.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================
+         JAVASCRIPT
+         ============================================ -->
+    <script>
+    (function() {
+        'use strict';
+
+        // --- Elements ---
+        var hamburger = document.getElementById('hamburger');
+        var navMenu = document.getElementById('navMenu');
+        var dlForm = document.getElementById('dlForm');
+        var linkInput = document.getElementById('linkInput');
+        var searchBtn = document.getElementById('searchBtn');
+        var formError = document.getElementById('formError');
+        var resultWrapper = document.getElementById('resultWrapper');
+        var spinnerBox = document.getElementById('spinnerBox');
+        var downloadCard = document.getElementById('downloadCard');
+        var faqItems = document.querySelectorAll('.faq-item');
+        var ctaBtn = document.getElementById('ctaBtn');
+        var yearEl = document.getElementById('year');
+
+        // --- Year ---
+        yearEl.textContent = new Date().getFullYear();
+
+        // --- Mobile Nav ---
+        hamburger.addEventListener('click', function() {
+            var isOpen = navMenu.classList.toggle('open');
+            hamburger.classList.toggle('open');
+            hamburger.setAttribute('aria-expanded', isOpen);
+        });
+
+        navMenu.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                navMenu.classList.remove('open');
+                hamburger.classList.remove('open');
+                hamburger.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('open');
+                hamburger.classList.remove('open');
+                hamburger.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // --- URL Validation ---
+        function isValidIG(url) {
+            return /^https?:\/\/(www\.)?instagram\.com\/(p|reel|reels|tv|stories)\//i.test(url.trim());
+        }
+
+        // --- Form Submit ---
+        dlForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            var url = linkInput.value.trim();
+
+            formError.classList.remove('visible');
+            downloadCard.classList.remove('visible');
+
+            if (!url || !isValidIG(url)) {
+                formError.classList.add('visible');
+                linkInput.focus();
+                return;
+            }
+
+            // Show spinner
+            resultWrapper.classList.add('active');
+            spinnerBox.style.display = 'flex';
+            downloadCard.classList.remove('visible');
+            searchBtn.disabled = true;
+
+            setTimeout(function() {
+                resultWrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+
+            // Simulate 2s loading
+            setTimeout(function() {
+                spinnerBox.style.display = 'none';
+                downloadCard.classList.add('visible');
+                searchBtn.disabled = false;
+            }, 2000);
+        });
+
+        // Clear error on typing
+        linkInput.addEventListener('input', function() {
+            formError.classList.remove('visible');
+        });
+
+        // --- FAQ Accordion ---
+        faqItems.forEach(function(item) {
+            var trigger = item.querySelector('.faq-trigger');
+            trigger.addEventListener('click', function() {
+                var isOpen = item.classList.contains('open');
+
+                // Close all
+                faqItems.forEach(function(other) {
+                    other.classList.remove('open');
+                    other.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
+                });
+
+                // Toggle current
+                if (!isOpen) {
+                    item.classList.add('open');
+                    trigger.setAttribute('aria-expanded', 'true');
+                }
+            });
+        });
+
+        // --- CTA Button ---
+        ctaBtn.addEventListener('click', function() {
+            linkInput.focus();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // --- Smooth scroll for hash links ---
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+            anchor.addEventListener('click', function(e) {
+                var id = this.getAttribute('href');
+                if (id === '#') return;
+                var target = document.querySelector(id);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // --- Scroll Reveal Animation ---
+        var revealEls = document.querySelectorAll('.feat-card, .step, .type-card, .faq-item, .trust-item, .about-mockup');
+        var revealObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry, index) {
+                if (entry.isIntersecting) {
+                    // Stagger animation
+                    var delay = Array.from(revealEls).indexOf(entry.target) % 4 * 80;
+                    setTimeout(function() {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, delay);
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+        revealEls.forEach(function(el) {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(35px)';
+            el.style.transition = 'opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1)';
+            revealObserver.observe(el);
+        });
+
+    })();
+    </script>
+
+</body>
+</html>
