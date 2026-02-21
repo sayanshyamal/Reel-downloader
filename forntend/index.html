@@ -215,8 +215,8 @@
         .hero {
             background: var(--gradient-hero);
             /* Full page height minus adjustment for design flow */
-            min-height: 100dvh; 
-            padding: 100px 24px 60px; 
+            min-height: 100dvh;
+            padding: 100px 24px 60px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -232,7 +232,7 @@
             bottom: -2px;
             left: 0;
             right: 0;
-            height: 40px; 
+            height: 40px;
             background: linear-gradient(to top, var(--bg-main), transparent);
         }
 
@@ -247,7 +247,7 @@
             font-weight: 900;
             color: var(--text-heading);
             line-height: 1.1;
-            margin-bottom: 12px; 
+            margin-bottom: 12px;
             letter-spacing: -1px;
         }
 
@@ -255,7 +255,7 @@
             font-size: clamp(0.95rem, 2vw, 1.1rem);
             color: var(--text-body);
             max-width: 600px;
-            margin: 0 auto 24px; 
+            margin: 0 auto 24px;
             font-weight: 400;
         }
 
@@ -284,7 +284,7 @@
 
         .search-form input {
             flex: 1;
-            padding: 14px 24px; 
+            padding: 14px 24px;
             background: transparent;
             border: none;
             outline: none;
@@ -304,7 +304,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            padding: 14px 32px; 
+            padding: 14px 32px;
             background: var(--gradient-button);
             background-size: 200% 200%;
             color: white;
@@ -368,8 +368,8 @@
         .format-list {
             display: flex;
             justify-content: center;
-            gap: 8px; 
-            margin-top: 24px; 
+            gap: 8px;
+            margin-top: 24px;
             flex-wrap: wrap;
         }
 
@@ -377,8 +377,8 @@
             background: white;
             border: 1px solid var(--border);
             border-radius: var(--r-full);
-            padding: 5px 14px; 
-            font-size: 0.75rem; 
+            padding: 5px 14px;
+            font-size: 0.75rem;
             font-weight: 700;
             color: var(--text-muted);
             display: flex;
@@ -399,7 +399,7 @@
         /* Result Area */
         .result-wrapper {
             max-width: 720px;
-            margin: 24px auto 0; 
+            margin: 24px auto 0;
             display: none;
             width: 100%;
         }
@@ -783,12 +783,12 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            font-size: 0.75rem; 
+            font-size: 0.75rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             margin-bottom: 14px;
-            padding: 5px 14px; 
+            padding: 5px 14px;
             border-radius: var(--r-full);
         }
 
@@ -1886,20 +1886,20 @@
                 }
 
                 if(videoLink) {
-                    // বাটনে ক্লিক করলে ব্যাকএন্ডের মাধ্যমে ডিরেক্ট ডাউনলোড হবে
+                    // Direct download via backend when button is clicked
                     const saveBtn = document.querySelector('.save-btn');
                     saveBtn.onclick = function() {
                         const originalText = saveBtn.innerHTML;
                         saveBtn.innerHTML = "Downloading File...";
                         saveBtn.style.opacity = "0.7";
 
-                        // আমাদের নতুন ব্যাকএন্ড রাউটে ভিডিও লিংকটি পাঠানো হচ্ছে
+                        // Sending the video link to our new backend route
                         const forceDownloadUrl = `https://reel-api-server.onrender.com/api/force-download?url=${encodeURIComponent(videoLink)}`;
                         
-                        // এটি ব্রাউজারের ডিফল্ট ডাউনলোড ম্যানেজার চালু করে দেবে
+                        // This will trigger the browser's default download manager
                         window.location.href = forceDownloadUrl;
 
-                        // ৩ সেকেন্ড পর বাটন আগের অবস্থায় ফিরিয়ে আনা
+                        // Restore button state after 3 seconds
                         setTimeout(() => {
                             saveBtn.innerHTML = originalText;
                             saveBtn.style.opacity = "1";
@@ -1922,13 +1922,13 @@
                     spinnerBox.style.display = 'none';
                     downloadCard.classList.add('visible');
                 } else {
-                    alert("ভিডিওর আসল লিংকটি পাওয়া যায়নি!");
+                    alert("Original video link not found!");
                     spinnerBox.style.display = 'none';
                 }
 
             } catch (error) {
                 console.error("Error:", error);
-                alert("আপনার ব্যাকএন্ড সার্ভার কি চালু আছে? চেক করুন।");
+                alert("Is your backend server running? Please check.");
                 spinnerBox.style.display = 'none';
             } finally {
                 searchBtn.disabled = false;
