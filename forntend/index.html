@@ -138,22 +138,12 @@
             66% { transform: translate(-25px, 30px) scale(0.95); }
         }
 
-        /* Navbar */
-        .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(255,255,255,0.88);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .navbar .container {
+        /* Top Left Logo */
+        .header-logo {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 72px;
+            justify-content: flex-start;
+            padding-top: 10px;
+            margin-bottom: 24px;
         }
 
         .logo {
@@ -161,15 +151,15 @@
             align-items: center;
             gap: 12px;
             font-weight: 900;
-            font-size: 1.45rem;
+            font-size: 1.35rem;
             color: var(--text-heading);
         }
 
         .logo-mark {
-            width: 42px;
-            height: 42px;
+            width: 38px;
+            height: 38px;
             background: var(--gradient-primary);
-            border-radius: 14px;
+            border-radius: 12px;
             display: grid;
             place-items: center;
             box-shadow: 0 4px 15px rgba(238,90,36,0.25);
@@ -181,78 +171,14 @@
         }
 
         .logo-mark svg {
-            width: 22px;
-            height: 22px;
-        }
-
-        .nav-menu {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .nav-menu a {
-            padding: 10px 20px;
-            font-size: 0.92rem;
-            font-weight: 600;
-            color: var(--text-body);
-            border-radius: var(--r-full);
-            transition: var(--transition);
-        }
-
-        .nav-menu a:hover {
-            color: var(--salmon);
-            background: rgba(238,90,36,0.06);
-        }
-
-        .nav-menu .nav-cta {
-            background: var(--gradient-button);
-            color: white !important;
-            padding: 10px 24px;
-            box-shadow: var(--shadow-btn);
-            margin-left: 8px;
-        }
-
-        .nav-menu .nav-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-btn-hover);
-            background: var(--gradient-button-hover);
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            padding: 8px;
-            background: none;
-            border: none;
-            border-radius: 10px;
-        }
-
-        .hamburger span {
-            width: 24px;
-            height: 2.5px;
-            background: var(--text-heading);
-            border-radius: 4px;
-            transition: var(--transition);
-        }
-
-        .hamburger.open span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 6px);
-        }
-        .hamburger.open span:nth-child(2) {
-            opacity: 0;
-            transform: scaleX(0);
-        }
-        .hamburger.open span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -6px);
+            width: 20px;
+            height: 20px;
         }
 
         /* Hero */
         .hero {
             background: var(--gradient-hero);
-            padding: 80px 24px 60px;
+            padding: 10px 24px 30px; 
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -264,7 +190,7 @@
             bottom: -2px;
             left: 0;
             right: 0;
-            height: 80px;
+            height: 40px; 
             background: linear-gradient(to top, var(--bg-main), transparent);
         }
 
@@ -273,57 +199,20 @@
             z-index: 1;
         }
 
-        .hero-chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: var(--r-full);
-            padding: 8px 22px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--salmon);
-            margin-bottom: 30px;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .chip-pulse {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #00b894;
-            position: relative;
-        }
-
-        .chip-pulse::after {
-            content: '';
-            position: absolute;
-            inset: -3px;
-            border-radius: 50%;
-            border: 2px solid rgba(0,184,148,0.3);
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.5); opacity: 0; }
-        }
-
         .hero h1 {
-            font-size: clamp(2.4rem, 6.5vw, 4rem);
+            font-size: clamp(2rem, 5.5vw, 3.5rem);
             font-weight: 900;
             color: var(--text-heading);
             line-height: 1.1;
-            margin-bottom: 20px;
-            letter-spacing: -2px;
+            margin-bottom: 12px; 
+            letter-spacing: -1px;
         }
 
         .hero-desc {
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
             color: var(--text-body);
             max-width: 600px;
-            margin: 0 auto 44px;
+            margin: 0 auto 24px; 
             font-weight: 400;
         }
 
@@ -338,7 +227,7 @@
             background: var(--bg-card);
             border: 2px solid var(--border);
             border-radius: var(--r-full);
-            padding: 7px;
+            padding: 5px;
             box-shadow: var(--shadow-md), 0 0 60px rgba(255,107,107,0.06);
             transition: var(--transition);
         }
@@ -351,12 +240,12 @@
 
         .search-form input {
             flex: 1;
-            padding: 18px 28px;
+            padding: 14px 24px; 
             background: transparent;
             border: none;
             outline: none;
             font-family: inherit;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 500;
             color: var(--text-heading);
             min-width: 0;
@@ -370,15 +259,15 @@
         .search-btn {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 18px 40px;
+            gap: 8px;
+            padding: 14px 32px; 
             background: var(--gradient-button);
             background-size: 200% 200%;
             color: white;
             border: none;
             border-radius: var(--r-full);
             font-family: inherit;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 800;
             cursor: pointer;
             white-space: nowrap;
@@ -406,16 +295,16 @@
         }
 
         .search-btn svg {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             flex-shrink: 0;
         }
 
         .form-error {
             color: #e74c3c;
-            font-size: 0.88rem;
+            font-size: 0.85rem;
             font-weight: 600;
-            margin-top: 14px;
+            margin-top: 10px;
             display: none;
         }
 
@@ -435,8 +324,8 @@
         .format-list {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-top: 28px;
+            gap: 8px; 
+            margin-top: 16px; 
             flex-wrap: wrap;
         }
 
@@ -444,13 +333,13 @@
             background: white;
             border: 1px solid var(--border);
             border-radius: var(--r-full);
-            padding: 7px 18px;
-            font-size: 0.8rem;
+            padding: 5px 14px; 
+            font-size: 0.75rem; 
             font-weight: 700;
             color: var(--text-muted);
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             box-shadow: var(--shadow-xs);
             transition: var(--transition);
             cursor: default;
@@ -466,7 +355,7 @@
         /* Result Area */
         .result-wrapper {
             max-width: 720px;
-            margin: 40px auto 0;
+            margin: 24px auto 0; 
             display: none;
         }
 
@@ -481,14 +370,14 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 18px;
-            padding: 55px;
+            gap: 14px;
+            padding: 40px;
         }
 
         .spinner {
-            width: 48px;
-            height: 48px;
-            border: 4px solid rgba(238,90,36,0.15);
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(238,90,36,0.15);
             border-top-color: var(--coral);
             border-right-color: var(--salmon);
             border-radius: 50%;
@@ -498,7 +387,7 @@
         @keyframes spin { to { transform: rotate(360deg); } }
 
         .spinner-text {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 600;
             color: var(--text-muted);
         }
@@ -838,12 +727,7 @@
             fill: none;
         }
 
-        /* Features */
-        .features {
-            padding: 90px 24px;
-            background: var(--bg-section-alt);
-        }
-
+        /* Features & Badges */
         .section-top {
             text-align: center;
             margin-bottom: 60px;
@@ -853,12 +737,12 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            font-size: 0.82rem;
+            font-size: 0.75rem; 
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 2.5px;
+            letter-spacing: 1.5px;
             margin-bottom: 14px;
-            padding: 7px 18px;
+            padding: 5px 14px; 
             border-radius: var(--r-full);
         }
 
@@ -891,6 +775,11 @@
             font-size: 1.05rem;
             max-width: 500px;
             margin: 0 auto;
+        }
+
+        .features {
+            padding: 90px 24px;
+            background: var(--bg-section-alt);
         }
 
         .features-grid {
@@ -1327,138 +1216,130 @@
             color: var(--text-light);
         }
 
-        /* Responsive */
+        /* Responsive Layouts */
         @media (max-width: 1024px) {
             .features-grid { grid-template-columns: repeat(2, 1fr); }
             .types-grid { grid-template-columns: repeat(3, 1fr); }
-            .about-grid { grid-template-columns: 1fr; gap: 40px; }
-            .about-visual { order: -1; }
+            .about-grid { grid-template-columns: 0.8fr 1.2fr; gap: 30px; align-items: center; }
+            .about-visual { order: 0; }
         }
 
         @media (max-width: 768px) {
-            .nav-menu {
-                position: fixed;
-                top: 72px; left: 0; right: 0;
-                background: rgba(255,255,255,0.98);
-                backdrop-filter: blur(24px);
-                flex-direction: column;
-                padding: 20px;
-                gap: 6px;
-                border-bottom: 1px solid var(--border);
-                transform: translateY(-130%);
-                opacity: 0;
-                transition: var(--transition);
-                pointer-events: none;
-                box-shadow: var(--shadow-lg);
-            }
-
-            .nav-menu.open {
-                transform: translateY(0);
-                opacity: 1;
-                pointer-events: all;
-            }
-
-            .nav-menu a {
-                width: 100%;
-                text-align: center;
-                padding: 14px;
-                border-radius: var(--r-sm);
-            }
-
-            .nav-menu .nav-cta {
-                margin-left: 0;
-                margin-top: 8px;
-            }
-
-            .hamburger { display: flex; }
-
-            .hero { padding: 50px 20px 45px; }
+            /* Tighter Mobile Layout To Reduce Scroll & Push up */
+            .hero { padding: 10px 16px 20px; }
+            .header-logo { margin-bottom: 16px; padding-top: 5px; }
+            .hero h1 { font-size: 1.7rem; margin-bottom: 8px; line-height: 1.1; }
+            .hero-desc { font-size: 0.85rem; margin-bottom: 16px; max-width: 100%; line-height: 1.4; }
 
             .search-form {
                 flex-direction: column;
                 border-radius: var(--r-lg);
-                padding: 8px;
+                padding: 4px;
             }
+            .search-form input { padding: 10px 14px; text-align: center; font-size: 0.85rem; }
+            .search-btn { border-radius: var(--r-sm); justify-content: center; padding: 10px; font-size: 0.85rem; }
 
-            .search-form input {
-                padding: 16px 20px;
-                text-align: center;
-            }
-
-            .search-btn {
-                border-radius: var(--r-sm);
-                justify-content: center;
-                padding: 16px;
-            }
-
-            .features-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
-
-            .steps-row {
-                grid-template-columns: 1fr;
-                max-width: 420px;
-            }
-
-            .steps-row::before { display: none; }
-
-            .types-grid {
-                grid-template-columns: repeat(2, 1fr);
-                max-width: 360px;
-                margin: 0 auto;
-            }
+            .format-list { margin-top: 12px; gap: 4px; }
+            .format-tag { padding: 4px 10px; font-size: 0.65rem; }
 
             .download-card-body {
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
-            }
-
-            .thumb-wrap {
-                width: 100%;
-                max-width: 280px;
-                height: 240px;
-            }
-
-            .file-tags { justify-content: center; }
-
-            .trust-grid {
-                grid-template-columns: repeat(2, 1fr);
+                padding: 16px;
                 gap: 16px;
             }
+            .thumb-wrap { width: 100%; max-width: 240px; height: 180px; }
+            .save-btn { padding: 10px 24px; font-size: 0.85rem; }
 
-            .cta-box { padding: 50px 28px; }
+            .trust-bar { padding: 24px 16px; }
+            .trust-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .trust-icon { font-size: 1.4rem; margin-bottom: 4px; }
+            .trust-number { font-size: 1.2rem; }
+            .trust-label { font-size: 0.65rem; }
 
-            .about-mockup { max-width: 300px; padding: 28px 20px; }
+            .about-section { padding: 40px 16px; }
+            
+            .about-grid { grid-template-columns: 0.85fr 1.15fr; gap: 16px; align-items: start; }
+            
+            .about-mockup { padding: 16px 12px; border-radius: var(--r-md); }
+            .mockup-header { margin-bottom: 12px; gap: 6px; }
+            .mockup-avatar { width: 28px; height: 28px; font-size: 0.8rem; }
+            .mockup-user { font-size: 0.65rem; }
+            .mockup-handle { font-size: 0.55rem; }
+            .mockup-video { margin-bottom: 10px; border-radius: 8px; }
+            .mockup-video::before { font-size: 2rem; }
+            .mockup-actions { gap: 8px; }
+            .mockup-actions span { font-size: 1rem; }
+
+            .about-text h2 { font-size: 1.1rem; margin-bottom: 8px; line-height: 1.3; }
+            .about-text p { font-size: 0.75rem; margin-bottom: 10px; line-height: 1.5; }
+            .about-text ul li { font-size: 0.75rem; padding: 4px 0; gap: 8px; }
+            .about-text ul li .check-icon { width: 20px; height: 20px; }
+            .about-text ul li .check-icon svg { width: 10px; height: 10px; }
+
+            .features, .how-it-works, .content-types, .faq-section { padding: 40px 16px; }
+            .section-top { margin-bottom: 30px; }
+            .section-top h2 { font-size: 1.3rem; margin-bottom: 8px; }
+            .section-top p { font-size: 0.85rem; }
+            
+            .features-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; gap: 16px; }
+            .feat-card { padding: 20px 16px; }
+            .feat-icon { width: 48px; height: 48px; margin-bottom: 12px; border-radius: 14px; }
+            .feat-icon svg { width: 22px; height: 22px; }
+            .feat-card h3 { font-size: 0.95rem; }
+            .feat-card p { font-size: 0.8rem; }
+
+            .steps-row { grid-template-columns: 1fr; max-width: 420px; gap: 16px; }
+            .steps-row::before { display: none; }
+            .step { padding: 20px 16px; }
+            .step-badge { width: 40px; height: 40px; font-size: 1.1rem; margin-bottom: 12px; }
+            .step-visual { font-size: 1.8rem; margin-bottom: 10px; }
+            .step h3 { font-size: 0.95rem; }
+            .step p { font-size: 0.8rem; }
+
+            .types-grid { grid-template-columns: repeat(2, 1fr); max-width: 360px; margin: 0 auto; gap: 10px; }
+            .type-card { padding: 16px 10px; }
+            .type-emoji { font-size: 1.6rem; margin-bottom: 8px; }
+            .type-card h4 { font-size: 0.85rem; }
+            .type-card p { font-size: 0.7rem; }
+
+            .faq-trigger { padding: 14px 16px; font-size: 0.85rem; }
+            .faq-body-inner { padding: 0 16px 16px; font-size: 0.8rem; }
+
+            .cta-banner { padding: 40px 16px; }
+            .cta-box { padding: 30px 20px; }
+            .cta-box h2 { font-size: 1.2rem; }
+            .cta-box p { font-size: 0.85rem; margin-bottom: 20px; }
+            .cta-action { padding: 12px 24px; font-size: 0.9rem; }
+            
+            .site-footer { padding: 30px 16px; }
+            .footer-brand { font-size: 1.2rem; }
+            .footer-tagline { font-size: 0.8rem; }
+            .footer-nav { gap: 16px; }
+            .footer-nav a { font-size: 0.8rem; }
         }
 
         @media (max-width: 480px) {
-            .navbar .container { height: 62px; }
             .logo { font-size: 1.25rem; }
-            .logo-mark { width: 36px; height: 36px; border-radius: 11px; }
-            .logo-mark svg { width: 18px; height: 18px; }
-
-            .hero h1 { font-size: 1.9rem; letter-spacing: -1px; }
-            .hero-desc { font-size: 0.92rem; }
-            .hero-chip { font-size: 0.78rem; padding: 6px 16px; }
-
-            .section-top h2 { font-size: 1.45rem; }
-
-            .feat-card { padding: 28px 20px; }
-            .feat-icon { width: 64px; height: 64px; }
-
-            .faq-trigger { padding: 18px 20px; font-size: 0.92rem; }
-            .faq-body-inner { padding: 0 20px 18px; font-size: 0.87rem; }
-
-            .trust-number { font-size: 1.3rem; }
-            .trust-label { font-size: 0.7rem; }
-
-            .types-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-            .type-card { padding: 24px 12px; }
-            .type-emoji { font-size: 2rem; }
-
-            .cta-box h2 { font-size: 1.4rem; }
-            .cta-action { padding: 14px 28px; font-size: 0.95rem; }
-
-            .about-text h2 { font-size: 1.5rem; }
+            .logo-mark { width: 32px; height: 32px; border-radius: 10px; }
+            .logo-mark svg { width: 16px; height: 16px; }
+            
+            .about-grid { grid-template-columns: 0.9fr 1.1fr; gap: 10px; }
+            .mockup-avatar { width: 22px; height: 22px; font-size: 0.7rem; }
+            .mockup-user { font-size: 0.55rem; }
+            .mockup-handle { font-size: 0.45rem; }
+            .mockup-video::before { font-size: 1.5rem; }
+            .mockup-actions span { font-size: 0.85rem; }
+            
+            .about-text h2 { font-size: 1rem; }
+            .about-text p { font-size: 0.7rem; margin-bottom: 6px; }
+            .about-text ul li { font-size: 0.65rem; }
+            .about-text ul li .check-icon { width: 16px; height: 16px; }
+            .about-text ul li .check-icon svg { width: 8px; height: 8px; }
+            
+            .section-badge { font-size: 0.6rem; padding: 4px 10px; }
+            .section-top h2 { font-size: 1.15rem; }
         }
     </style>
 </head>
@@ -1471,40 +1352,22 @@
         <div class="shape shape-3"></div>
     </div>
 
-    <!-- Navbar -->
-    <nav class="navbar" role="navigation" aria-label="Main navigation">
-        <div class="container">
-            <a href="#" class="logo" aria-label="ReelSave Home">
-                <span class="logo-mark">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                        <polyline points="7 10 12 15 17 10"/>
-                        <line x1="12" y1="15" x2="12" y2="3"/>
-                    </svg>
-                </span>
-                <span class="gradient-text">ReelSave</span>
-            </a>
-
-            <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
-                <span></span><span></span><span></span>
-            </button>
-
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#features">Features</a></li>
-                <li><a href="#how-to">How It Works</a></li>
-                <li><a href="#types">Supported</a></li>
-                <li><a href="#faq">FAQ</a></li>
-                <li><a href="#hero" class="nav-cta">Get Started</a></li>
-            </ul>
-        </div>
-    </nav>
-
     <!-- Hero Section -->
     <section class="hero" id="hero">
         <div class="container">
-            <div class="hero-chip">
-                <span class="chip-pulse"></span>
-                Online &amp; Free — No Installation Required
+            
+            <!-- Top Left Logo Only -->
+            <div class="header-logo">
+                <a href="#" class="logo" aria-label="ReelSave Home">
+                    <span class="logo-mark">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                    </span>
+                    <span class="gradient-text">ReelSave</span>
+                </a>
             </div>
 
             <h1>Instagram <span class="gradient-text">Reels</span><br>Downloader</h1>
@@ -1606,6 +1469,7 @@
     <section class="about-section" id="about">
         <div class="container">
             <div class="about-grid">
+                <!-- Creator Studio Mockup -->
                 <div class="about-visual">
                     <div class="about-mockup">
                         <div class="mockup-header">
@@ -1624,6 +1488,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- About Description -->
                 <div class="about-text">
                     <h2>About <span class="gradient-text">ReelSave</span> Instagram Downloader</h2>
                     <p>ReelSave is a professional, free online utility designed to help you download and save Instagram Reels, videos, photos, stories, and IGTV content directly to your device with ease.</p>
@@ -1869,7 +1734,7 @@
             <div class="cta-box">
                 <h2>Ready to Save Your Favourite Content?</h2>
                 <p>Start downloading Instagram Reels in seconds — free, fast, and without limits.</p>
-                <button class="cta-action" id="ctaBtn">
+                <button class="cta-action" onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); document.getElementById('linkInput').focus();">
                     Get Started Now
                 </button>
             </div>
@@ -1899,8 +1764,6 @@
     (function() {
         'use strict';
 
-        var hamburger = document.getElementById('hamburger');
-        var navMenu = document.getElementById('navMenu');
         var dlForm = document.getElementById('dlForm');
         var linkInput = document.getElementById('linkInput');
         var searchBtn = document.getElementById('searchBtn');
@@ -1909,41 +1772,17 @@
         var spinnerBox = document.getElementById('spinnerBox');
         var downloadCard = document.getElementById('downloadCard');
         var faqItems = document.querySelectorAll('.faq-item');
-        var ctaBtn = document.getElementById('ctaBtn');
         var yearEl = document.getElementById('year');
 
         // Year
         yearEl.textContent = new Date().getFullYear();
-
-        // Mobile Navigation
-        hamburger.addEventListener('click', function() {
-            var isOpen = navMenu.classList.toggle('open');
-            hamburger.classList.toggle('open');
-            hamburger.setAttribute('aria-expanded', isOpen);
-        });
-
-        navMenu.querySelectorAll('a').forEach(function(link) {
-            link.addEventListener('click', function() {
-                navMenu.classList.remove('open');
-                hamburger.classList.remove('open');
-                hamburger.setAttribute('aria-expanded', 'false');
-            });
-        });
-
-        document.addEventListener('click', function(e) {
-            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-                navMenu.classList.remove('open');
-                hamburger.classList.remove('open');
-                hamburger.setAttribute('aria-expanded', 'false');
-            }
-        });
 
         // URL Validation
         function isValidIG(url) {
             return /^https?:\/\/(www\.)?instagram\.com\/(p|reel|reels|tv|stories)\//i.test(url.trim());
         }
 
-        // Form Submission - আপনার নতুন Render ব্যাকএন্ডের সাথে কানেকশন
+        // Form Submission - Render Backend Connection
         dlForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             var url = linkInput.value.trim();
@@ -1962,7 +1801,6 @@
             searchBtn.disabled = true;
 
             try {
-                // আপনার নিজের ব্যাকএন্ডে (Render) রিকোয়েস্ট পাঠানো হচ্ছে
                 const response = await fetch('https://reel-api-server.onrender.com/api/download', {
                     method: 'POST',
                     headers: {
@@ -1974,12 +1812,10 @@
                 const result = await response.json();
                 console.log("Backend Response:", result);
 
-                // --- নতুন আপডেট করা অংশ (আসল লিংক খোঁজার লজিক) ---
                 let videoLink = "";
                 
-                // চেক করা হচ্ছে ডাটার ভেতরে medias নামের কোনো লিস্ট আছে কিনা
                 if (result.data && result.data.medias && result.data.medias.length > 0) {
-                    videoLink = result.data.medias[0].url; // লিস্টের প্রথম লিংকটি নেওয়া হলো (সাধারণত এটিই ভিডিও হয়)
+                    videoLink = result.data.medias[0].url; 
                 } else if (result.data && result.data.video_url) {
                     videoLink = result.data.video_url;
                 } else {
@@ -1987,33 +1823,26 @@
                 }
 
                 if(videoLink) {
-                    // বাটনে ক্লিক করলে ভিডিও সরাসরি ডাউনলোড হবে
                     const saveBtn = document.querySelector('.save-btn');
                     saveBtn.onclick = async function() {
                         try {
-                            // ডাউনলোড বাটনের টেক্সট পরিবর্তন করে ইউজারকে বোঝানো যে কাজ চলছে
                             const originalText = saveBtn.innerHTML;
                             saveBtn.innerHTML = "Downloading...";
                             saveBtn.disabled = true;
 
-                            // ভিডিওটি ফেচ (Fetch) করে ব্লব (Blob) বা ফাইলে রূপান্তর করা
                             const response = await fetch(videoLink);
                             const blob = await response.blob();
                             
-                            // ব্লব থেকে একটি অস্থায়ী ডাউনলোড লিংক তৈরি করা
                             const downloadUrl = window.URL.createObjectURL(blob);
                             const a = document.createElement('a');
                             a.style.display = 'none';
                             a.href = downloadUrl;
                             
-                            // ফাইলের একটি নাম দেওয়া (যেমন: Instagram_Reel_12345.mp4)
                             a.download = `Instagram_Reel_${Math.floor(Math.random() * 10000)}.mp4`;
                             
-                            // অটোমেটিক ক্লিক করে ডাউনলোড শুরু করা
                             document.body.appendChild(a);
                             a.click();
                             
-                            // ডাউনলোড শেষে সব আগের মতো করে দেওয়া
                             window.URL.revokeObjectURL(downloadUrl);
                             document.body.removeChild(a);
                             saveBtn.innerHTML = originalText;
@@ -2021,25 +1850,22 @@
                         } catch (err) {
                             console.error("Download Error:", err);
                             alert("সরাসরি ডাউনলোডে সমস্যা হচ্ছে। ভিডিওটি নতুন ট্যাবে ওপেন হচ্ছে, সেখান থেকে থ্রি-ডটে ক্লিক করে ডাউনলোড করে নিন।");
-                            // যদি কোনো কারণে ফেচ কাজ না করে, তবে আগের নিয়মে নতুন ট্যাবেই ওপেন হবে
                             window.open(videoLink, '_blank');
                             saveBtn.innerHTML = originalText;
                             saveBtn.disabled = false;
                         }
                     };
 
-                    // স্ক্রিনে ভিডিওর আসল ছবি (Thumbnail) দেখানো (বেশি স্মার্ট লজিক)
-                    let thumbnailUrl = "data:image/svg+xml,..."; // আপনার আগের ডিফল্ট ছবি
+                    let thumbnailUrl = "data:image/svg+xml,...";
 
                     if(result.data && result.data.thumbnail) {
-                        thumbnailUrl = result.data.thumbnail; // যদি সরাসরি thumbnail থাকে
+                        thumbnailUrl = result.data.thumbnail;
                     } else if (result.data && result.data.medias && result.data.medias.length > 0 && result.data.medias[0].thumbnail) {
-                        thumbnailUrl = result.data.medias[0].thumbnail; // যদি medias এর ভেতর thumbnail থাকে
+                        thumbnailUrl = result.data.medias[0].thumbnail;
                     }
 
                     document.querySelector('.thumb-wrap img').src = thumbnailUrl;
                     if(result.data && result.data.title) {
-                        // টাইটেল খুব বড় হলে ছোট করে দেখানো
                         document.querySelector('.file-info h3').textContent = result.data.title.substring(0, 30) + "...";
                     }
 
@@ -2079,12 +1905,6 @@
                     trigger.setAttribute('aria-expanded', 'true');
                 }
             });
-        });
-
-        // CTA Button
-        ctaBtn.addEventListener('click', function() {
-            linkInput.focus();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
         // Smooth Scroll
