@@ -3,7 +3,7 @@ const cors = require('cors');
 const axios = require('axios');
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 // ফ্রন্টএন্ড থেকে রিকোয়েস্ট অ্যালাও করা
 app.use(cors());
