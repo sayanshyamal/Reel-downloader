@@ -1557,9 +1557,9 @@
                             <div class="file-tags">
                                 <span class="tag-format">MP4</span>
                                 <span class="tag-quality">1080p HD</span>
-                                <span class="tag-size">8.7 MB</span>
+                                <span class="tag-size">Ready</span>
                             </div>
-                            <button class="save-btn" onclick="alert('In a production environment, this would initiate the file download.')">
+                            <button class="save-btn">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                                     <polyline points="7 10 12 15 17 10"/>
@@ -1595,7 +1595,7 @@
                 </div>
                 <div class="trust-item">
                     <div class="trust-icon">⚡</div>
-                    <div class="trust-number gradient-text"><3s</div>
+                    <div class="trust-number gradient-text">&lt;3s</div>
                     <div class="trust-label">Avg. Speed</div>
                 </div>
             </div>
@@ -1943,8 +1943,8 @@
             return /^https?:\/\/(www\.)?instagram\.com\/(p|reel|reels|tv|stories)\//i.test(url.trim());
         }
 
-        // Form Submission
-        dlForm.addEventListener('submit', function(e) {
+        // Form Submission - আপনার নিজের ব্যাকএন্ডের সাথে কানেকশন
+        dlForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             var url = linkInput.value.trim();
 
@@ -1959,18 +1959,104 @@
 
             resultWrapper.classList.add('active');
             spinnerBox.style.display = 'flex';
-            downloadCard.classList.remove('visible');
             searchBtn.disabled = true;
 
-            setTimeout(function() {
-                resultWrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 100);
+            try {
+                // আপনার নিজের ব্যাকএন্ডে (localhost:5000) রিকোয়েস্ট পাঠানো হচ্ছে
+                const response = await fetch('http://localhost:5000/api/download', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ url: url })
+                });
 
-            setTimeout(function() {
+                const result = await response.json();
+                console.log("Backend Response:", result);
+
+                // --- নতুন আপডেট করা অংশ (আসল লিংক খোঁজার লজিক) ---
+                let videoLink = "";
+                
+                // চেক করা হচ্ছে ডাটার ভেতরে medias নামের কোনো লিস্ট আছে কিনা
+                if (result.data && result.data.medias && result.data.medias.length > 0) {
+                    videoLink = result.data.medias[0].url; // লিস্টের প্রথম লিংকটি নেওয়া হলো (সাধারণত এটিই ভিডিও হয়)
+                } else if (result.data && result.data.video_url) {
+                    videoLink = result.data.video_url;
+                } else {
+                    videoLink = result.url;
+                }
+
+                if(videoLink) {
+                    // বাটনে ক্লিক করলে ভিডিও সরাসরি ডাউনলোড হবে
+                    const saveBtn = document.querySelector('.save-btn');
+                    saveBtn.onclick = async function() {
+                        try {
+                            // ডাউনলোড বাটনের টেক্সট পরিবর্তন করে ইউজারকে বোঝানো যে কাজ চলছে
+                            const originalText = saveBtn.innerHTML;
+                            saveBtn.innerHTML = "Downloading...";
+                            saveBtn.disabled = true;
+
+                            // ভিডিওটি ফেচ (Fetch) করে ব্লব (Blob) বা ফাইলে রূপান্তর করা
+                            const response = await fetch(videoLink);
+                            const blob = await response.blob();
+                            
+                            // ব্লব থেকে একটি অস্থায়ী ডাউনলোড লিংক তৈরি করা
+                            const downloadUrl = window.URL.createObjectURL(blob);
+                            const a = document.createElement('a');
+                            a.style.display = 'none';
+                            a.href = downloadUrl;
+                            
+                            // ফাইলের একটি নাম দেওয়া (যেমন: Instagram_Reel_12345.mp4)
+                            a.download = `Instagram_Reel_${Math.floor(Math.random() * 10000)}.mp4`;
+                            
+                            // অটোমেটিক ক্লিক করে ডাউনলোড শুরু করা
+                            document.body.appendChild(a);
+                            a.click();
+                            
+                            // ডাউনলোড শেষে সব আগের মতো করে দেওয়া
+                            window.URL.revokeObjectURL(downloadUrl);
+                            document.body.removeChild(a);
+                            saveBtn.innerHTML = originalText;
+                            saveBtn.disabled = false;
+                        } catch (err) {
+                            console.error("Download Error:", err);
+                            alert("সরাসরি ডাউনলোডে সমস্যা হচ্ছে। ভিডিওটি নতুন ট্যাবে ওপেন হচ্ছে, সেখান থেকে থ্রি-ডটে ক্লিক করে ডাউনলোড করে নিন।");
+                            // যদি কোনো কারণে ফেচ কাজ না করে, তবে আগের নিয়মে নতুন ট্যাবেই ওপেন হবে
+                            window.open(videoLink, '_blank');
+                            saveBtn.innerHTML = originalText;
+                            saveBtn.disabled = false;
+                        }
+                    };
+
+                    // স্ক্রিনে ভিডিওর আসল ছবি (Thumbnail) দেখানো (বেশি স্মার্ট লজিক)
+                    let thumbnailUrl = "data:image/svg+xml,..."; // আপনার আগের ডিফল্ট ছবি
+
+                    if(result.data && result.data.thumbnail) {
+                        thumbnailUrl = result.data.thumbnail; // যদি সরাসরি thumbnail থাকে
+                    } else if (result.data && result.data.medias && result.data.medias.length > 0 && result.data.medias[0].thumbnail) {
+                        thumbnailUrl = result.data.medias[0].thumbnail; // যদি medias এর ভেতর thumbnail থাকে
+                    }
+
+                    document.querySelector('.thumb-wrap img').src = thumbnailUrl;
+                    if(result.data && result.data.title) {
+                        // টাইটেল খুব বড় হলে ছোট করে দেখানো
+                        document.querySelector('.file-info h3').textContent = result.data.title.substring(0, 30) + "...";
+                    }
+
+                    spinnerBox.style.display = 'none';
+                    downloadCard.classList.add('visible');
+                } else {
+                    alert("ভিডিওর আসল লিংকটি পাওয়া যায়নি!");
+                    spinnerBox.style.display = 'none';
+                }
+
+            } catch (error) {
+                console.error("Error:", error);
+                alert("আপনার ব্যাকএন্ড সার্ভার কি চালু আছে? চেক করুন।");
                 spinnerBox.style.display = 'none';
-                downloadCard.classList.add('visible');
+            } finally {
                 searchBtn.disabled = false;
-            }, 2000);
+            }
         });
 
         linkInput.addEventListener('input', function() {
