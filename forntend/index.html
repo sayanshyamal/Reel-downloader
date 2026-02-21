@@ -3,15 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Download Instagram Reels, Videos, Photos, Stories and IGTV online for free. Fast, easy and high quality Instagram content downloader.">
-    <title>ReelSave - Instagram Reels Downloader | Save IG Reels Online Free</title>
+    <meta name="description" content="Download Instagram Reels, Videos, Photos, Stories and IGTV online for free. Fast, reliable and high-quality Instagram content downloader.">
+    <title>ReelSave — Instagram Reels Downloader | Save IG Content Online Free</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        /* ============================================
-           RESET & CUSTOM PROPERTIES
-           ============================================ */
         *, *::before, *::after {
             margin: 0;
             padding: 0;
@@ -19,7 +16,6 @@
         }
 
         :root {
-            /* Warm sunset palette */
             --coral: #ff6b6b;
             --salmon: #ee5a24;
             --tangerine: #f39c12;
@@ -28,23 +24,19 @@
             --mint: #00cec9;
             --deep-purple: #6c5ce7;
 
-            /* Backgrounds */
             --bg-main: #fefefe;
             --bg-warm: #fffaf5;
             --bg-section-alt: #fef9f4;
             --bg-card: #ffffff;
             --bg-input: #faf8f6;
 
-            /* Text */
             --text-heading: #1e1333;
             --text-body: #4a4260;
             --text-muted: #9590a8;
             --text-light: #c4bfd6;
 
-            /* Gradients */
             --gradient-hero: linear-gradient(160deg, #fff5ee 0%, #ffe8f0 30%, #f0e6ff 60%, #e6f0ff 100%);
             --gradient-primary: linear-gradient(135deg, #ff6b6b, #ee5a24, #f39c12);
-            --gradient-warm: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fdfcfb 100%);
             --gradient-card-1: linear-gradient(135deg, #fff5f5, #ffe8ec);
             --gradient-card-2: linear-gradient(135deg, #fef9e7, #fef3cd);
             --gradient-card-3: linear-gradient(135deg, #f0e6ff, #e8daff);
@@ -52,9 +44,7 @@
             --gradient-button: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 50%, #f39c12 100%);
             --gradient-button-hover: linear-gradient(135deg, #e85d5d 0%, #d94f1f 50%, #e08e0e 100%);
             --gradient-cta: linear-gradient(135deg, #6c5ce7, #a29bfe, #fd79a8);
-            --gradient-glow: radial-gradient(circle, rgba(255,107,107,0.12) 0%, transparent 60%);
 
-            /* Borders & Shadows */
             --border: rgba(238, 90, 36, 0.1);
             --border-hover: rgba(238, 90, 36, 0.25);
             --shadow-xs: 0 1px 3px rgba(30,19,51,0.04);
@@ -65,7 +55,6 @@
             --shadow-btn: 0 8px 25px rgba(238,90,36,0.3);
             --shadow-btn-hover: 0 14px 40px rgba(238,90,36,0.4);
 
-            /* Radius */
             --r-sm: 12px;
             --r-md: 18px;
             --r-lg: 24px;
@@ -105,9 +94,7 @@
             background-clip: text;
         }
 
-        /* ============================================
-           FLOATING SHAPES (Background decoration)
-           ============================================ */
+        /* Background Shapes */
         .bg-shapes {
             position: fixed;
             inset: 0;
@@ -151,9 +138,7 @@
             66% { transform: translate(-25px, 30px) scale(0.95); }
         }
 
-        /* ============================================
-           NAVBAR
-           ============================================ */
+        /* Navbar */
         .navbar {
             position: sticky;
             top: 0;
@@ -264,36 +249,7 @@
             transform: rotate(-45deg) translate(5px, -6px);
         }
 
-        /* ============================================
-           AD BANNERS
-           Container for Google AdSense. Replace inner
-           content with your <ins> + <script> tags.
-           ============================================ */
-        .ad-container {
-            display: flex;
-            justify-content: center;
-            padding: 16px 24px;
-        }
-
-        .ad-slot {
-            width: 100%;
-            max-width: 728px;
-            min-height: 90px;
-            background: linear-gradient(135deg, #fef9f4, #fef5ee, #fff0f6);
-            border: 2px dashed rgba(238,90,36,0.15);
-            border-radius: var(--r-sm);
-            display: grid;
-            place-items: center;
-            color: var(--text-light);
-            font-size: 0.8rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-
-        /* ============================================
-           HERO SECTION
-           ============================================ */
+        /* Hero */
         .hero {
             background: var(--gradient-hero);
             padding: 80px 24px 60px;
@@ -310,28 +266,6 @@
             right: 0;
             height: 80px;
             background: linear-gradient(to top, var(--bg-main), transparent);
-        }
-
-        /* Floating emojis */
-        .float-emoji {
-            position: absolute;
-            font-size: 2rem;
-            pointer-events: none;
-            opacity: 0.4;
-            animation: emojiDrift 8s ease-in-out infinite;
-        }
-
-        .float-emoji:nth-child(1) { top: 10%; left: 8%; animation-delay: 0s; font-size: 1.8rem; }
-        .float-emoji:nth-child(2) { top: 15%; right: 10%; animation-delay: -2s; font-size: 2.2rem; }
-        .float-emoji:nth-child(3) { bottom: 25%; left: 5%; animation-delay: -4s; font-size: 1.6rem; }
-        .float-emoji:nth-child(4) { bottom: 20%; right: 8%; animation-delay: -6s; font-size: 2rem; }
-        .float-emoji:nth-child(5) { top: 45%; left: 15%; animation-delay: -1s; font-size: 1.4rem; }
-
-        @keyframes emojiDrift {
-            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
-            25% { transform: translateY(-20px) rotate(10deg); opacity: 0.5; }
-            50% { transform: translateY(-8px) rotate(-5deg); opacity: 0.4; }
-            75% { transform: translateY(-25px) rotate(8deg); opacity: 0.6; }
         }
 
         .hero .container {
@@ -388,12 +322,12 @@
         .hero-desc {
             font-size: clamp(1rem, 2.5vw, 1.2rem);
             color: var(--text-body);
-            max-width: 560px;
+            max-width: 600px;
             margin: 0 auto 44px;
             font-weight: 400;
         }
 
-        /* URL Input Form */
+        /* Search Form */
         .search-box {
             max-width: 720px;
             margin: 0 auto;
@@ -477,7 +411,6 @@
             flex-shrink: 0;
         }
 
-        /* Error */
         .form-error {
             color: #e74c3c;
             font-size: 0.88rem;
@@ -499,7 +432,6 @@
             80% { transform: translateX(5px); }
         }
 
-        /* Format badges */
         .format-list {
             display: flex;
             justify-content: center;
@@ -531,9 +463,7 @@
             box-shadow: var(--shadow-sm);
         }
 
-        /* ============================================
-           RESULT AREA
-           ============================================ */
+        /* Result Area */
         .result-wrapper {
             max-width: 720px;
             margin: 40px auto 0;
@@ -725,9 +655,7 @@
             height: 18px;
         }
 
-        /* ============================================
-           TRUST BAR
-           ============================================ */
+        /* Trust Bar */
         .trust-bar {
             padding: 56px 24px;
             background: var(--bg-card);
@@ -776,9 +704,7 @@
             margin-top: 2px;
         }
 
-        /* ============================================
-           CONTENT SECTION: About / Description
-           ============================================ */
+        /* About Section */
         .about-section {
             padding: 80px 24px;
         }
@@ -912,9 +838,7 @@
             fill: none;
         }
 
-        /* ============================================
-           FEATURES SECTION
-           ============================================ */
+        /* Features */
         .features {
             padding: 90px 24px;
             background: var(--bg-section-alt);
@@ -1043,9 +967,7 @@
             line-height: 1.65;
         }
 
-        /* ============================================
-           HOW IT WORKS
-           ============================================ */
+        /* How It Works */
         .how-it-works {
             padding: 90px 24px;
         }
@@ -1059,7 +981,6 @@
             position: relative;
         }
 
-        /* Connector line */
         .steps-row::before {
             content: '';
             position: absolute;
@@ -1132,9 +1053,7 @@
             line-height: 1.65;
         }
 
-        /* ============================================
-           SUPPORTED CONTENT TYPES
-           ============================================ */
+        /* Content Types */
         .content-types {
             padding: 90px 24px;
             background: var(--bg-section-alt);
@@ -1183,9 +1102,7 @@
             font-weight: 500;
         }
 
-        /* ============================================
-           FAQ SECTION
-           ============================================ */
+        /* FAQ */
         .faq-section {
             padding: 90px 24px;
         }
@@ -1280,9 +1197,7 @@
             line-height: 1.85;
         }
 
-        /* ============================================
-           CTA BANNER
-           ============================================ */
+        /* CTA Banner */
         .cta-banner {
             padding: 80px 24px;
         }
@@ -1358,9 +1273,7 @@
             box-shadow: 0 14px 40px rgba(0,0,0,0.2);
         }
 
-        /* ============================================
-           FOOTER
-           ============================================ */
+        /* Footer */
         .site-footer {
             background: var(--bg-card);
             border-top: 1px solid rgba(0,0,0,0.05);
@@ -1383,7 +1296,7 @@
             font-size: 0.9rem;
             color: var(--text-muted);
             text-align: center;
-            max-width: 380px;
+            max-width: 420px;
         }
 
         .footer-nav {
@@ -1414,9 +1327,7 @@
             color: var(--text-light);
         }
 
-        /* ============================================
-           RESPONSIVE
-           ============================================ */
+        /* Responsive */
         @media (max-width: 1024px) {
             .features-grid { grid-template-columns: repeat(2, 1fr); }
             .types-grid { grid-template-columns: repeat(3, 1fr); }
@@ -1514,10 +1425,6 @@
                 gap: 16px;
             }
 
-            .ad-slot { min-height: 70px; }
-
-            .float-emoji { display: none; }
-
             .cta-box { padding: 50px 28px; }
 
             .about-mockup { max-width: 300px; padding: 28px 20px; }
@@ -1564,9 +1471,7 @@
         <div class="shape shape-3"></div>
     </div>
 
-    <!-- ============================================
-         NAVBAR
-         ============================================ -->
+    <!-- Navbar -->
     <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="container">
             <a href="#" class="logo" aria-label="ReelSave Home">
@@ -1589,47 +1494,26 @@
                 <li><a href="#how-to">How It Works</a></li>
                 <li><a href="#types">Supported</a></li>
                 <li><a href="#faq">FAQ</a></li>
-                <li><a href="#hero" class="nav-cta">Try Now</a></li>
+                <li><a href="#hero" class="nav-cta">Get Started</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- ============================================
-         AD BANNER 1 — Top (728×90)
-         Replace inner content with your AdSense code:
-         <ins class="adsbygoogle" ...></ins>
-         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-         ============================================ -->
-    <div class="ad-container" aria-label="Advertisement">
-        <div class="ad-slot">
-            <!-- ADSENSE SLOT 1 — Paste code here -->
-            Ad Space — 728 × 90
-        </div>
-    </div>
-
-    <!-- ============================================
-         HERO SECTION
-         ============================================ -->
+    <!-- Hero Section -->
     <section class="hero" id="hero">
-        <span class="float-emoji" aria-hidden="true">🎬</span>
-        <span class="float-emoji" aria-hidden="true">📱</span>
-        <span class="float-emoji" aria-hidden="true">✨</span>
-        <span class="float-emoji" aria-hidden="true">🎵</span>
-        <span class="float-emoji" aria-hidden="true">💜</span>
-
         <div class="container">
             <div class="hero-chip">
                 <span class="chip-pulse"></span>
-                Online &amp; Free — No App Needed
+                Online &amp; Free — No Installation Required
             </div>
 
             <h1>Instagram <span class="gradient-text">Reels</span><br>Downloader</h1>
 
-            <p class="hero-desc">Download Instagram Reels, Videos, Photos, Stories and IGTV content online — high quality, no watermark, unlimited.</p>
+            <p class="hero-desc">Save Instagram Reels, Videos, Photos, Stories and IGTV content directly to your device — in high definition, without watermarks, and with no usage limits.</p>
 
             <div class="search-box">
                 <form class="search-form" id="dlForm" autocomplete="off">
-                    <input type="url" id="linkInput" placeholder="Paste Instagram Reel or Video URL..." aria-label="Instagram URL" required>
+                    <input type="url" id="linkInput" placeholder="Paste Instagram Reel or Video URL here..." aria-label="Instagram URL" required>
                     <button type="submit" class="search-btn" id="searchBtn">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -1639,22 +1523,22 @@
                         Download
                     </button>
                 </form>
-                <p class="form-error" id="formError">⚠️ Enter a valid Instagram URL (e.g., instagram.com/reel/...)</p>
+                <p class="form-error" id="formError">Please enter a valid Instagram URL (e.g., instagram.com/reel/...)</p>
             </div>
 
             <div class="format-list">
-                <span class="format-tag"><span class="badge-emoji">🎬</span> Reels</span>
-                <span class="format-tag"><span class="badge-emoji">📹</span> Videos</span>
-                <span class="format-tag"><span class="badge-emoji">📸</span> Photos</span>
-                <span class="format-tag"><span class="badge-emoji">📖</span> Stories</span>
-                <span class="format-tag"><span class="badge-emoji">📺</span> IGTV</span>
+                <span class="format-tag">🎬 Reels</span>
+                <span class="format-tag">📹 Videos</span>
+                <span class="format-tag">📸 Photos</span>
+                <span class="format-tag">📖 Stories</span>
+                <span class="format-tag">📺 IGTV</span>
             </div>
 
             <!-- Result Area -->
             <div class="result-wrapper" id="resultWrapper">
                 <div class="spinner-box" id="spinnerBox">
                     <div class="spinner"></div>
-                    <p class="spinner-text">Processing your reel...</p>
+                    <p class="spinner-text">Processing your request...</p>
                 </div>
 
                 <div class="download-card" id="downloadCard">
@@ -1669,13 +1553,13 @@
                         </div>
                         <div class="file-info">
                             <h3>instagram_reel_2024.mp4</h3>
-                            <p class="file-desc">Your reel is ready to download!</p>
+                            <p class="file-desc">Your content is ready for download.</p>
                             <div class="file-tags">
                                 <span class="tag-format">MP4</span>
                                 <span class="tag-quality">1080p HD</span>
                                 <span class="tag-size">8.7 MB</span>
                             </div>
-                            <button class="save-btn" onclick="alert('In production, this triggers the real file download.')">
+                            <button class="save-btn" onclick="alert('In a production environment, this would initiate the file download.')">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                                     <polyline points="7 10 12 15 17 10"/>
@@ -1690,26 +1574,14 @@
         </div>
     </section>
 
-    <!-- ============================================
-         AD BANNER 2 — After Result
-         ============================================ -->
-    <div class="ad-container" aria-label="Advertisement">
-        <div class="ad-slot">
-            <!-- ADSENSE SLOT 2 — Paste code here -->
-            Ad Space — Responsive
-        </div>
-    </div>
-
-    <!-- ============================================
-         TRUST BAR
-         ============================================ -->
+    <!-- Trust Bar -->
     <section class="trust-bar">
         <div class="container">
             <div class="trust-grid">
                 <div class="trust-item">
                     <div class="trust-icon">🚀</div>
                     <div class="trust-number gradient-text">15M+</div>
-                    <div class="trust-label">Reels Saved</div>
+                    <div class="trust-label">Downloads</div>
                 </div>
                 <div class="trust-item">
                     <div class="trust-icon">⭐</div>
@@ -1723,16 +1595,14 @@
                 </div>
                 <div class="trust-item">
                     <div class="trust-icon">⚡</div>
-                    <div class="trust-number gradient-text">&lt;3s</div>
+                    <div class="trust-number gradient-text"><3s</div>
                     <div class="trust-label">Avg. Speed</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ============================================
-         ABOUT SECTION
-         ============================================ -->
+    <!-- About Section -->
     <section class="about-section" id="about">
         <div class="container">
             <div class="about-grid">
@@ -1742,7 +1612,7 @@
                             <div class="mockup-avatar">📸</div>
                             <div>
                                 <div class="mockup-user">creator_studio</div>
-                                <div class="mockup-handle">@creator_studio • Reel</div>
+                                <div class="mockup-handle">@creator_studio · Reel</div>
                             </div>
                         </div>
                         <div class="mockup-video"></div>
@@ -1755,25 +1625,25 @@
                     </div>
                 </div>
                 <div class="about-text">
-                    <h2>What is <span class="gradient-text">ReelSave</span> Instagram Downloader?</h2>
-                    <p>ReelSave is a fast, free online tool designed to help you download and save Instagram Reels, videos, photos, stories and IGTV content directly to your device.</p>
-                    <p>Whether you want to save a funny reel, an inspiring video, or a beautiful photo — ReelSave makes it effortless. No registration, no app installation, no limits.</p>
+                    <h2>About <span class="gradient-text">ReelSave</span> Instagram Downloader</h2>
+                    <p>ReelSave is a professional, free online utility designed to help you download and save Instagram Reels, videos, photos, stories, and IGTV content directly to your device with ease.</p>
+                    <p>Whether you need to preserve a memorable reel, an educational video, or a compelling photograph, ReelSave delivers a seamless experience. No registration, no application installation, and no usage restrictions.</p>
                     <ul>
                         <li>
                             <span class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-                            Full HD quality — up to 1080p
+                            Full HD quality — up to 1080p resolution
                         </li>
                         <li>
                             <span class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-                            No watermark on downloaded content
+                            No watermarks on downloaded content
                         </li>
                         <li>
                             <span class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-                            Works on all devices & browsers
+                            Compatible with all devices and browsers
                         </li>
                         <li>
                             <span class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-                            Unlimited downloads, forever free
+                            Unlimited downloads, permanently free
                         </li>
                     </ul>
                 </div>
@@ -1781,15 +1651,13 @@
         </div>
     </section>
 
-    <!-- ============================================
-         FEATURES SECTION
-         ============================================ -->
+    <!-- Features Section -->
     <section class="features" id="features">
         <div class="container">
             <div class="section-top">
-                <span class="section-badge badge-coral">🔥 Features</span>
-                <h2>Why <span class="gradient-text">Millions</span> Choose ReelSave</h2>
-                <p>The most reliable Instagram downloader with features you'll love.</p>
+                <span class="section-badge badge-coral">✦ Features</span>
+                <h2>Why <span class="gradient-text">Millions</span> Trust ReelSave</h2>
+                <p>A reliable Instagram downloader built with performance and simplicity in mind.</p>
             </div>
 
             <div class="features-grid">
@@ -1800,7 +1668,7 @@
                         </svg>
                     </div>
                     <h3>Original Quality</h3>
-                    <p>Download reels and videos in their original HD resolution — up to 1080p, no compression applied.</p>
+                    <p>Download reels and videos in their original HD resolution — up to 1080p, with no compression applied.</p>
                 </article>
 
                 <article class="feat-card">
@@ -1810,8 +1678,8 @@
                             <polyline points="12 6 12 12 16 14"/>
                         </svg>
                     </div>
-                    <h3>Blazing Fast</h3>
-                    <p>Our optimized servers process your download in under 3 seconds. No delays, no waiting around.</p>
+                    <h3>High-Speed Processing</h3>
+                    <p>Optimized servers process your download in under 3 seconds. No unnecessary delays or waiting periods.</p>
                 </article>
 
                 <article class="feat-card">
@@ -1821,8 +1689,8 @@
                             <polyline points="9 12 11 14 15 10"/>
                         </svg>
                     </div>
-                    <h3>Clean & Safe</h3>
-                    <p>No watermarks, no malware, no popups. Just clean downloads you can trust, every single time.</p>
+                    <h3>Secure &amp; Private</h3>
+                    <p>No watermarks, no malware, no intrusive pop-ups. Clean, trustworthy downloads every time.</p>
                 </article>
 
                 <article class="feat-card">
@@ -1832,80 +1700,76 @@
                             <line x1="12" y1="18" x2="12.01" y2="18"/>
                         </svg>
                     </div>
-                    <h3>Universal</h3>
-                    <p>Works on iPhone, Android, iPad, Windows, Mac — any device with a modern web browser.</p>
+                    <h3>Cross-Platform</h3>
+                    <p>Fully functional on iPhone, Android, iPad, Windows, and Mac — any device with a modern web browser.</p>
                 </article>
             </div>
         </div>
     </section>
 
-    <!-- ============================================
-         HOW IT WORKS SECTION
-         ============================================ -->
+    <!-- How It Works -->
     <section class="how-it-works" id="how-to">
         <div class="container">
             <div class="section-top">
-                <span class="section-badge badge-purple">📋 Guide</span>
-                <h2>Download Reels in <span class="gradient-text">3 Steps</span></h2>
-                <p>It couldn't be easier. Here's how it works.</p>
+                <span class="section-badge badge-purple">✦ Guide</span>
+                <h2>Download in <span class="gradient-text">Three Simple Steps</span></h2>
+                <p>A straightforward process designed for efficiency.</p>
             </div>
 
             <div class="steps-row">
                 <article class="step">
                     <div class="step-badge">1</div>
                     <span class="step-visual">🔗</span>
-                    <h3>Copy the Reel Link</h3>
-                    <p>Open Instagram, tap the three dots (⋯) on any reel or video, then tap "Copy Link" to clipboard.</p>
+                    <h3>Copy the Content Link</h3>
+                    <p>Open Instagram, tap the three-dot menu (⋯) on any reel or video, then select "Copy Link" to save it to your clipboard.</p>
                 </article>
 
                 <article class="step">
                     <div class="step-badge">2</div>
                     <span class="step-visual">📋</span>
-                    <h3>Paste URL Here</h3>
-                    <p>Come back to ReelSave and paste the copied Instagram URL into the download box above.</p>
+                    <h3>Paste the URL</h3>
+                    <p>Return to ReelSave and paste the copied Instagram URL into the download field at the top of this page.</p>
                 </article>
 
                 <article class="step">
                     <div class="step-badge">3</div>
                     <span class="step-visual">💾</span>
-                    <h3>Save to Device</h3>
-                    <p>Click Download and your reel will be saved directly to your phone, tablet, or computer.</p>
+                    <h3>Save to Your Device</h3>
+                    <p>Click "Download" and the content will be saved directly to your phone, tablet, or computer.</p>
                 </article>
             </div>
         </div>
     </section>
 
-    <!-- ============================================
-         SUPPORTED CONTENT TYPES
-         ============================================ -->
+    <!-- Supported Content Types -->
     <section class="content-types" id="types">
         <div class="container">
             <div class="section-top">
-                <span class="section-badge badge-mint">📦 Supported</span>
+                <span class="section-badge badge-mint">✦ Supported</span>
                 <h2>All Instagram <span class="gradient-text">Content Types</span></h2>
-                <p>ReelSave supports every type of Instagram content.</p>
+                <p>ReelSave supports every type of publicly available Instagram content.</p>
             </div>
 
             <div class="types-grid">
                 <div class="type-card">
                     <span class="type-emoji">🎞️</span>
                     <h4>Reels</h4>
-                    <p>Short videos</p>
+                    <p>Short-form videos</p>
                 </div>
                 <div class="type-card">
                     <span class="type-emoji">📹</span>
                     <h4>Videos</h4>
-                    <p>Feed videos</p>
+                    <p>Feed video posts</p>
                 </div>
                 <div class="type-card">
                     <span class="type-emoji">📸</span>
                     <h4>Photos</h4>
-                    <p>Single & carousel</p>
+                    <p>Single &amp; carousel</p>
                 </div>
                 <div class="type-card">
                     <span class="type-emoji">📖</span>
                     <h4>Stories</h4>
-                    <p>24hr content</p>
+                    <p>Ephemeral content</p>
                 </div>
                 <div class="type-card">
                     <span class="type-emoji">📺</span>
@@ -1916,25 +1780,13 @@
         </div>
     </section>
 
-    <!-- ============================================
-         AD BANNER 3 — Before FAQ
-         ============================================ -->
-    <div class="ad-container" aria-label="Advertisement">
-        <div class="ad-slot">
-            <!-- ADSENSE SLOT 3 — Paste code here -->
-            Ad Space — Responsive
-        </div>
-    </div>
-
-    <!-- ============================================
-         FAQ SECTION
-         ============================================ -->
+    <!-- FAQ Section -->
     <section class="faq-section" id="faq">
         <div class="container">
             <div class="section-top">
-                <span class="section-badge badge-coral">💡 FAQ</span>
+                <span class="section-badge badge-coral">✦ FAQ</span>
                 <h2>Frequently Asked <span class="gradient-text">Questions</span></h2>
-                <p>Quick answers to the most common questions.</p>
+                <p>Find answers to the most commonly asked questions below.</p>
             </div>
 
             <div class="faq-wrapper">
@@ -1944,47 +1796,47 @@
                         <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
                     </button>
                     <div class="faq-body"><div class="faq-body-inner">
-                        An Instagram Reels Downloader is a free online tool that lets you save Instagram Reels, videos, photos, and stories directly to your device. Simply paste the link to any public Instagram content, and ReelSave will process it and provide a direct download link — no software installation required.
+                        An Instagram Reels Downloader is a free online tool that allows you to save Instagram Reels, videos, photos, and stories directly to your device. Simply paste the link to any public Instagram content, and ReelSave will process it and provide a direct download link — no software installation is required.
                     </div></div>
                 </div>
 
                 <div class="faq-item">
                     <button class="faq-trigger" aria-expanded="false">
-                        <span>Is ReelSave really free to use?</span>
+                        <span>Is ReelSave free to use?</span>
                         <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
                     </button>
                     <div class="faq-body"><div class="faq-body-inner">
-                        Yes, ReelSave is completely free! There are no hidden charges, no premium tiers, no subscription fees, and no download limits. You can download as many Instagram reels and videos as you want, whenever you want — all at no cost.
+                        Yes, ReelSave is entirely free of charge. There are no hidden fees, no premium tiers, no subscription requirements, and no download limits. You may download as many Instagram reels and videos as needed, at any time, at no cost.
                     </div></div>
                 </div>
 
                 <div class="faq-item">
                     <button class="faq-trigger" aria-expanded="false">
-                        <span>Where are downloaded files saved on my device?</span>
+                        <span>Where are downloaded files stored on my device?</span>
                         <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
                     </button>
                     <div class="faq-body"><div class="faq-body-inner">
-                        On desktop computers, files are saved to your browser's default "Downloads" folder. On Android, check the Downloads folder or your Gallery app. On iPhone/iPad, files are saved to the Files app or your Photos library depending on your browser settings.
+                        On desktop computers, files are saved to your browser's default "Downloads" directory. On Android devices, please check the Downloads folder or your Gallery application. On iPhone and iPad, files are saved to the Files app or your Photos library, depending on your browser configuration.
                     </div></div>
                 </div>
 
                 <div class="faq-item">
                     <button class="faq-trigger" aria-expanded="false">
-                        <span>Can I download Reels from private Instagram accounts?</span>
+                        <span>Can I download content from private Instagram accounts?</span>
                         <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
                     </button>
                     <div class="faq-body"><div class="faq-body-inner">
-                        No. ReelSave can only download content from public Instagram accounts. Private account content is protected by Instagram's privacy settings and cannot be accessed by any third-party tool. We respect user privacy at all times.
+                        No. ReelSave can only download content from public Instagram accounts. Content from private accounts is protected by Instagram's privacy settings and cannot be accessed by any third-party service. We fully respect user privacy at all times.
                     </div></div>
                 </div>
 
                 <div class="faq-item">
                     <button class="faq-trigger" aria-expanded="false">
-                        <span>Do I need to create an account or install an app?</span>
+                        <span>Is account registration or app installation required?</span>
                         <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
                     </button>
                     <div class="faq-body"><div class="faq-body-inner">
-                        No account registration and no app installation needed! ReelSave works 100% in your web browser. Just visit our website, paste your Instagram link, and hit download. It's that simple — works on every device.
+                        No. Neither account registration nor application installation is necessary. ReelSave operates entirely within your web browser. Simply visit the website, paste your Instagram link, and initiate the download. The service is compatible with all devices.
                     </div></div>
                 </div>
 
@@ -1994,66 +1846,59 @@
                         <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
                     </button>
                     <div class="faq-body"><div class="faq-body-inner">
-                        Downloading Instagram content for personal, offline viewing is generally acceptable. However, you should always respect the original creator's copyright and intellectual property. Never re-upload, redistribute, or use downloaded content commercially without the creator's explicit permission.
+                        Downloading Instagram content for personal, offline viewing is generally considered acceptable. However, users should always respect the original creator's copyright and intellectual property rights. Redistribution or commercial use of downloaded content without the creator's explicit permission is not permitted.
                     </div></div>
                 </div>
 
                 <div class="faq-item">
                     <button class="faq-trigger" aria-expanded="false">
-                        <span>What video quality can I download?</span>
+                        <span>What video quality is available for download?</span>
                         <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
                     </button>
                     <div class="faq-body"><div class="faq-body-inner">
-                        ReelSave downloads Instagram content in the highest available quality — typically 1080p Full HD for videos and reels. The exact quality depends on the original upload quality set by the content creator. We never compress or reduce the quality of your downloads.
+                        ReelSave downloads Instagram content at the highest available quality — typically 1080p Full HD for videos and reels. The exact quality depends on the original upload resolution set by the content creator. We do not compress or reduce the quality of downloaded files.
                     </div></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ============================================
-         CTA BANNER
-         ============================================ -->
+    <!-- CTA Banner -->
     <section class="cta-banner">
         <div class="container">
             <div class="cta-box">
-                <h2>Ready to Save Your Favorite Reels?</h2>
-                <p>Start downloading Instagram Reels in seconds — free, fast, and unlimited.</p>
+                <h2>Ready to Save Your Favourite Content?</h2>
+                <p>Start downloading Instagram Reels in seconds — free, fast, and without limits.</p>
                 <button class="cta-action" id="ctaBtn">
-                    🚀 Start Downloading Now
+                    Get Started Now
                 </button>
             </div>
         </div>
     </section>
 
-    <!-- ============================================
-         FOOTER
-         ============================================ -->
+    <!-- Footer -->
     <footer class="site-footer">
         <div class="container">
             <div class="footer-inner">
                 <span class="footer-brand gradient-text">ReelSave</span>
-                <p class="footer-tagline">The fastest free Instagram Reels downloader. Save videos, photos, stories, and IGTV with one click.</p>
-                <nav class="footer-nav" aria-label="Footer">
+                <p class="footer-tagline">A fast, free, and reliable Instagram content downloader. Save Reels, videos, photos, stories, and IGTV with a single click.</p>
+                <nav class="footer-nav" aria-label="Footer navigation">
                     <a href="#">Privacy Policy</a>
                     <a href="#">Terms of Service</a>
                     <a href="#">Contact</a>
                     <a href="#">DMCA</a>
                 </nav>
                 <div class="footer-line"></div>
-                <p class="footer-copy">&copy; <span id="year"></span> ReelSave. All rights reserved. Not affiliated with Instagram or Meta.</p>
+                <p class="footer-copy">© <span id="year"></span> ReelSave. All rights reserved. Not affiliated with Instagram or Meta Platforms, Inc.</p>
             </div>
         </div>
     </footer>
 
-    <!-- ============================================
-         JAVASCRIPT
-         ============================================ -->
+    <!-- JavaScript -->
     <script>
     (function() {
         'use strict';
 
-        // --- Elements ---
         var hamburger = document.getElementById('hamburger');
         var navMenu = document.getElementById('navMenu');
         var dlForm = document.getElementById('dlForm');
@@ -2067,10 +1912,10 @@
         var ctaBtn = document.getElementById('ctaBtn');
         var yearEl = document.getElementById('year');
 
-        // --- Year ---
+        // Year
         yearEl.textContent = new Date().getFullYear();
 
-        // --- Mobile Nav ---
+        // Mobile Navigation
         hamburger.addEventListener('click', function() {
             var isOpen = navMenu.classList.toggle('open');
             hamburger.classList.toggle('open');
@@ -2093,12 +1938,12 @@
             }
         });
 
-        // --- URL Validation ---
+        // URL Validation
         function isValidIG(url) {
             return /^https?:\/\/(www\.)?instagram\.com\/(p|reel|reels|tv|stories)\//i.test(url.trim());
         }
 
-        // --- Form Submit ---
+        // Form Submission
         dlForm.addEventListener('submit', function(e) {
             e.preventDefault();
             var url = linkInput.value.trim();
@@ -2112,7 +1957,6 @@
                 return;
             }
 
-            // Show spinner
             resultWrapper.classList.add('active');
             spinnerBox.style.display = 'flex';
             downloadCard.classList.remove('visible');
@@ -2122,7 +1966,6 @@
                 resultWrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }, 100);
 
-            // Simulate 2s loading
             setTimeout(function() {
                 spinnerBox.style.display = 'none';
                 downloadCard.classList.add('visible');
@@ -2130,24 +1973,21 @@
             }, 2000);
         });
 
-        // Clear error on typing
         linkInput.addEventListener('input', function() {
             formError.classList.remove('visible');
         });
 
-        // --- FAQ Accordion ---
+        // FAQ Accordion
         faqItems.forEach(function(item) {
             var trigger = item.querySelector('.faq-trigger');
             trigger.addEventListener('click', function() {
                 var isOpen = item.classList.contains('open');
 
-                // Close all
                 faqItems.forEach(function(other) {
                     other.classList.remove('open');
                     other.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
                 });
 
-                // Toggle current
                 if (!isOpen) {
                     item.classList.add('open');
                     trigger.setAttribute('aria-expanded', 'true');
@@ -2155,13 +1995,13 @@
             });
         });
 
-        // --- CTA Button ---
+        // CTA Button
         ctaBtn.addEventListener('click', function() {
             linkInput.focus();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // --- Smooth scroll for hash links ---
+        // Smooth Scroll
         document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
             anchor.addEventListener('click', function(e) {
                 var id = this.getAttribute('href');
@@ -2174,12 +2014,11 @@
             });
         });
 
-        // --- Scroll Reveal Animation ---
+        // Scroll Reveal Animation
         var revealEls = document.querySelectorAll('.feat-card, .step, .type-card, .faq-item, .trust-item, .about-mockup');
         var revealObserver = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry, index) {
+            entries.forEach(function(entry) {
                 if (entry.isIntersecting) {
-                    // Stagger animation
                     var delay = Array.from(revealEls).indexOf(entry.target) % 4 * 80;
                     setTimeout(function() {
                         entry.target.style.opacity = '1';
