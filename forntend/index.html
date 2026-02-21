@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="referrer" content="no-referrer">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Download Instagram Reels, Videos, Photos, Stories and IGTV online for free. Fast, reliable and high-quality Instagram content downloader.">
     <title>ReelSave — Instagram Reels Downloader | Save IG Content Online Free</title>
@@ -1823,37 +1824,24 @@
                 }
 
                 if(videoLink) {
+                    // বাটনে ক্লিক করলে ব্যাকএন্ডের মাধ্যমে ডিরেক্ট ডাউনলোড হবে
                     const saveBtn = document.querySelector('.save-btn');
-                    saveBtn.onclick = async function() {
-                        try {
-                            const originalText = saveBtn.innerHTML;
-                            saveBtn.innerHTML = "Downloading...";
-                            saveBtn.disabled = true;
+                    saveBtn.onclick = function() {
+                        const originalText = saveBtn.innerHTML;
+                        saveBtn.innerHTML = "Downloading File...";
+                        saveBtn.style.opacity = "0.7";
 
-                            const response = await fetch(videoLink);
-                            const blob = await response.blob();
-                            
-                            const downloadUrl = window.URL.createObjectURL(blob);
-                            const a = document.createElement('a');
-                            a.style.display = 'none';
-                            a.href = downloadUrl;
-                            
-                            a.download = `Instagram_Reel_${Math.floor(Math.random() * 10000)}.mp4`;
-                            
-                            document.body.appendChild(a);
-                            a.click();
-                            
-                            window.URL.revokeObjectURL(downloadUrl);
-                            document.body.removeChild(a);
+                        // আমাদের নতুন ব্যাকএন্ড রাউটে ভিডিও লিংকটি পাঠানো হচ্ছে
+                        const forceDownloadUrl = `https://reel-api-server.onrender.com/api/force-download?url=${encodeURIComponent(videoLink)}`;
+                        
+                        // এটি ব্রাউজারের ডিফল্ট ডাউনলোড ম্যানেজার চালু করে দেবে
+                        window.location.href = forceDownloadUrl;
+
+                        // ৩ সেকেন্ড পর বাটন আগের অবস্থায় ফিরিয়ে আনা
+                        setTimeout(() => {
                             saveBtn.innerHTML = originalText;
-                            saveBtn.disabled = false;
-                        } catch (err) {
-                            console.error("Download Error:", err);
-                            alert("সরাসরি ডাউনলোডে সমস্যা হচ্ছে। ভিডিওটি নতুন ট্যাবে ওপেন হচ্ছে, সেখান থেকে থ্রি-ডটে ক্লিক করে ডাউনলোড করে নিন।");
-                            window.open(videoLink, '_blank');
-                            saveBtn.innerHTML = originalText;
-                            saveBtn.disabled = false;
-                        }
+                            saveBtn.style.opacity = "1";
+                        }, 3000);
                     };
 
                     let thumbnailUrl = "data:image/svg+xml,...";
