@@ -10,6 +10,11 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+// --- Cron-job এর জন্য মেইন রুটে একটি রেসপন্স সেট করা ---
+app.get('/', (req, res) => {
+    res.status(200).send("Server is awake and running!");
+});
+
 // --- ১. ফ্রন্টএন্ড থেকে ভিডিও খোঁজার রিকোয়েস্ট (POST) ---
 app.post('/api/download', async (req, res) => {
     const videoUrl = req.body.url; // ইউজারের দেওয়া ইনস্টাগ্রাম লিংক
