@@ -159,6 +159,50 @@
         .hamburger-btn svg { width: 24px; height: 24px; }
 
         /* =========================================
+           MOBILE MENU
+           ========================================= */
+        .mobile-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-glass);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            text-align: center;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: var(--transition);
+            box-shadow: var(--shadow-md);
+        }
+
+        .mobile-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .mobile-menu a {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-heading);
+            padding: 10px;
+            border-radius: var(--r-sm);
+            transition: var(--transition);
+        }
+
+        .mobile-menu a:hover {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--brand-primary);
+        }
+
+        /* =========================================
            BACKGROUND GLOW SHAPES
            ========================================= */
         .bg-shapes {
@@ -889,6 +933,14 @@
                 </svg>
             </button>
         </div>
+        
+        <!-- Dropdown Menu -->
+        <nav class="mobile-menu" id="mobileMenu">
+            <a href="#about" class="menu-link">About</a>
+            <a href="#features" class="menu-link">Features</a>
+            <a href="#how-to" class="menu-link">Guide</a>
+            <a href="#faq" class="menu-link">FAQ</a>
+        </nav>
     </header>
 
     <!-- Hero Section -->
@@ -1237,6 +1289,34 @@
         var downloadCard = document.getElementById('downloadCard');
         var faqItems = document.querySelectorAll('.faq-item');
         var yearEl = document.getElementById('year');
+
+        // Hamburger Menu Logic
+        var hamburgerBtn = document.querySelector('.hamburger-btn');
+        var mobileMenu = document.getElementById('mobileMenu');
+        var menuLinks = document.querySelectorAll('.menu-link');
+        var isMenuOpen = false;
+        
+        var hamburgerIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
+        var closeIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+
+        hamburgerBtn.addEventListener('click', function() {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                mobileMenu.classList.add('active');
+                hamburgerBtn.innerHTML = closeIcon;
+            } else {
+                mobileMenu.classList.remove('active');
+                hamburgerBtn.innerHTML = hamburgerIcon;
+            }
+        });
+
+        menuLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                isMenuOpen = false;
+                mobileMenu.classList.remove('active');
+                hamburgerBtn.innerHTML = hamburgerIcon;
+            });
+        });
 
         // Year
         yearEl.textContent = new Date().getFullYear();
