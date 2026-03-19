@@ -6,29 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="GrIAmr3MK_kKKCefsH-l5nkmk9Yb7XAeyygDtp6sH5k" />
     
-    <!-- =========================================
-         SEO & TOP RANKING KEYWORDS
-         ========================================= -->
     <title>ReelSave - #1 Instagram Reels Downloader | Save IG Videos Online</title>
     <meta name="description" content="Download Instagram Reels, Videos, Photos, Stories, and IGTV online for free with ReelSave. Fast, secure, no watermark, and 1080p high-quality Instagram video downloader.">
     <meta name="keywords" content="Instagram reels downloader, download Instagram reels online, IG video downloader, save Instagram reels, Instagram story downloader, ReelSave, download IGTV, free Instagram downloader, Instagram photo downloader, Insta save, IG downloader without watermark, download Instagram video by link, save Insta reels online">
     <meta name="author" content="Sayan Studio">
     <meta name="robots" content="index, follow">
     
-    <!-- Open Graph / Social Media Meta Tags -->
     <meta property="og:title" content="ReelSave - #1 Instagram Reels Downloader">
     <meta property="og:description" content="Download Instagram Reels, Videos, and Stories directly to your device for free. High quality, no watermark, unlimited downloads.">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="ReelSave">
     <meta property="og:url" content="https://reels.sayan.studio">
     
-    <!-- =========================================
-         FAVICON / LOGO (save.png)
-         ========================================= -->
     <link rel="icon" type="image/png" href="save.png">
     <link rel="apple-touch-icon" href="save.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6366f1">
 
-    <!-- Schema Markup for Google SEO -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -146,7 +140,6 @@
 </head>
 <body>
 
-    <!-- NAVBAR -->
     <header class="navbar">
         <div class="container nav-container">
             <a href="#" class="logo">
@@ -165,7 +158,6 @@
         </nav>
     </header>
 
-    <!-- HERO SECTION -->
     <section class="hero">
         <div class="container">
             <h1>Instagram <span class="gradient-text">Reels</span><br>Downloader</h1>
@@ -182,7 +174,6 @@
                 <p class="form-error" id="formError">Please enter a valid Instagram URL.</p>
             </div>
 
-            <!-- RESULT AREA -->
             <div class="result-wrapper" id="resultWrapper">
                 <div class="spinner-box" id="spinnerBox" style="display:none;">
                     <div class="spinner"></div>
@@ -208,7 +199,6 @@
         </div>
     </section>
 
-    <!-- BLOG PREVIEW SECTION -->
     <section class="section-padding" id="blog-preview">
         <div class="container">
             <div class="section-top">
@@ -230,7 +220,6 @@
         </div>
     </section>
 
-    <!-- HOW IT WORKS -->
     <section class="section-padding" id="how-to" style="background: white;">
         <div class="container">
             <div class="section-top">
@@ -256,7 +245,6 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer class="site-footer">
         <div class="container">
             <a href="#" class="footer-brand gradient-text">ReelSave</a>
@@ -274,7 +262,6 @@
         </div>
     </footer>
 
-    <!-- JAVASCRIPT -->
     <script>
         // Menu Toggle
         const menuBtn = document.getElementById('menuBtn');
@@ -336,6 +323,16 @@
                 resultWrapper.style.display = 'none';
             }
         };
+    </script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                .then(reg => console.log("Service Worker Registered Successfully!"))
+                .catch(err => console.error("Service Worker Registration Failed:", err));
+            });
+        }
     </script>
 </body>
 </html>
