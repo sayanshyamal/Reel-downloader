@@ -95,7 +95,12 @@ export async function handleYouTube(req, res) {
 
     let info;
     try {
-      info = await play.video_info(trimmedUrl);
+      const fetchPromise = play.video_info(trimmedUrl);
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error("Request timed out")), 10000)
+      );
+      
+      info = await Promise.race([fetchPromise, timeoutPromise]);
     } catch (innerErr) {
       console.error("play-dl video_info failed:", innerErr.message);
 
