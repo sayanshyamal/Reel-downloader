@@ -1,14 +1,8 @@
 /**
  * YouTube Video Extractor
  * -------------------------
- * Uses @distube/ytdl-core (actively-maintained fork of ytdl-core)
- * to extract video metadata and direct download URLs.
- *
- * Returns multiple quality options so the frontend can offer choices.
- *
- * FALLBACK: If ytdl-core ever breaks (YouTube changes are frequent),
- * consider switching to `yt-dlp-exec` which wraps the yt-dlp binary
- * and is far more resilient to changes.
+ * Uses youtube-dl-exec (wrapper for yt-dlp) to safely bypass IP blocks
+ * and robustly extract metadata and formats.
  */
 
 import ytDlp from "youtube-dl-exec";
@@ -94,12 +88,14 @@ export async function handleYouTube(req, res) {
     let info;
     try {
       // yt-dlp is extremely robust and will not hang on dead links like play-dl
+      // Bypass datacenter IP Blocks by forcing mobile clients (iOS/Android)
       info = await ytDlp(trimmedUrl, {
         dumpJson: true,
         noWarnings: true,
         preferFreeFormats: true,
         noCallHome: true,
         noCheckCertificate: true,
+        extractorArgs: "youtube:player_client=ios,android,web"
       });
     } catch (innerErr) {
       console.error("yt-dlp failed:", innerErr.message);
@@ -115,7 +111,7 @@ export async function handleYouTube(req, res) {
       if (msg.includes("sign in") || msg.includes("age")) {
         return fail(res, "This video is age-restricted. Age-restricted videos are not supported.", 403);
       }
-      if (msg.includes("429") || msg.includes("bot")) {
+      if (msg.includes("429") || msg.includes("bot") || msg.includes("sign in to confirm")) {
          return fail(
           res,
           "YouTube is temporarily blocking downloads from this server IP. Please try another video or try again later.",
