@@ -88,14 +88,13 @@ export async function handleYouTube(req, res) {
     let info;
     try {
       // yt-dlp is extremely robust and will not hang on dead links like play-dl
-      // Bypass datacenter IP Blocks by forcing IPv6 and mobile clients (iOS/Android)
+      // Bypass datacenter IP Blocks by forcing mobile clients (iOS/Android)
       info = await ytDlp(trimmedUrl, {
         dumpJson: true,
         noWarnings: true,
         preferFreeFormats: true,
         noCallHome: true,
         noCheckCertificate: true,
-        forceIpv6: true, // Extreme IP block bypass
         extractorArgs: "youtube:player_client=ios,android,web"
       });
     } catch (innerErr) {
