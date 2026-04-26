@@ -116,8 +116,8 @@ export async function handleYouTube(req, res) {
       
       return fail(
         res,
-        "Failed to fetch YouTube video info. The video might be restricted or the service is temporarily unavailable.",
-        502
+        "YouTube blocked the request or the video is restricted. Please try again later.",
+        400
       );
     }
 
