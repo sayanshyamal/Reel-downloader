@@ -75,6 +75,9 @@ export const metadata: Metadata = {
     title: "AnyClip — Free Video Downloader",
     description: "Download videos from Instagram, Facebook, and YouTube for free in HD. No login required.",
   },
+  verification: {
+    google: "gDXgFmsT_8VF3VN_VU3voKmc24eL9-Fqv6vukd1kzy8",
+  },
 };
 
 export default function RootLayout({
