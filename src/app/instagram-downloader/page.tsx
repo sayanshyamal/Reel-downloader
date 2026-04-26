@@ -5,15 +5,30 @@ import BlogSection from "@/components/BlogSection";
 import Script from "next/script";
 
 export const metadata: Metadata = {
-  title: "Instagram Reel & Video Downloader - Fast & Free",
-  description: "Download Instagram Reels and Videos instantly without any app in 1080p. Secure, fast, and completely free online Instagram downloader.",
+  title: "Instagram Reel & Video Downloader — Download Reels HD Free Online",
+  description: "Download Instagram Reels, Videos, IGTV, Photos and Stories instantly in 1080p HD. No app, no login, no watermark. The fastest free Instagram video downloader online.",
+  keywords: [
+    "instagram downloader", "instagram reel downloader", "instagram video downloader",
+    "download instagram reels", "save instagram video", "instagram reel saver",
+    "ig downloader", "ig reel downloader", "instagram reels download online",
+    "download reels from instagram", "insta video downloader", "insta reel download",
+    "instagram story downloader", "download instagram video online free",
+    "instagram reel download without app", "save reels without watermark",
+    "instagram video saver online", "how to download instagram reels",
+    "instagram photo downloader", "download instagram post",
+    "instagram downloader HD", "instagram reel to mp4",
+    "copy paste instagram downloader", "best instagram downloader",
+    "instagram video download 1080p", "reel download kaise kare",
+    "instagram downloader online", "instagram save video",
+    "download reel without login", "free instagram downloader 2025",
+  ],
   alternates: {
     canonical: "/instagram-downloader",
   },
   openGraph: {
-    title: "Instagram Reel & Video Downloader - Fast & Free",
-    description: "Download Instagram Reels and Videos instantly without any app in 1080p. Secure, fast, and completely free online Instagram downloader.",
-    url: "https://yourdomain.com/instagram-downloader",
+    title: "Instagram Reel & Video Downloader — Download Reels HD Free",
+    description: "Download Instagram Reels, Videos and Photos instantly in 1080p HD. No app, no login. Fastest free Instagram downloader.",
+    url: "https://reels.sayan.studio/instagram-downloader",
   },
 };
 
@@ -22,7 +37,7 @@ export default function InstagramDownloaderPage() {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "AnyClip Instagram Downloader",
-    "url": "https://yourdomain.com/instagram-downloader",
+    "url": "https://reels.sayan.studio/instagram-downloader",
     "applicationCategory": "MultimediaApplication",
     "operatingSystem": "All",
     "description": "A free tool to download Instagram reels and videos securely.",

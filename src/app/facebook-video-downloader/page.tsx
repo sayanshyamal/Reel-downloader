@@ -5,15 +5,30 @@ import BlogSection from "@/components/BlogSection";
 import Script from "next/script";
 
 export const metadata: Metadata = {
-  title: "Facebook Video Downloader - Fast & Free HD Download",
-  description: "Download Facebook videos and reels instantly in HD without any app. Secure, fast, and completely free online Facebook video downloader.",
+  title: "Facebook Video Downloader — Download FB Videos & Reels HD Free",
+  description: "Download Facebook videos and reels instantly in HD quality. No app, no login required. The best free online Facebook video downloader — save any public FB video as MP4.",
+  keywords: [
+    "facebook video downloader", "fb video downloader", "download facebook video",
+    "facebook reel downloader", "fb reel downloader", "download fb video online",
+    "facebook video download online free", "save facebook video",
+    "fb video saver", "download facebook reels", "facebook video downloader HD",
+    "facebook watch downloader", "fb video downloader online free",
+    "download video from facebook", "how to download facebook video",
+    "facebook video download without app", "facebook mp4 downloader",
+    "fb video download 1080p", "best facebook video downloader",
+    "facebook video saver online", "download fb reels",
+    "facebook downloader online", "save fb video to phone",
+    "fb video download kaise kare", "download facebook video free",
+    "facebook video converter mp4", "fb video downloader app alternative",
+    "download facebook watch video", "free fb downloader 2025",
+  ],
   alternates: {
     canonical: "/facebook-video-downloader",
   },
   openGraph: {
-    title: "Facebook Video Downloader - Fast & Free HD Download",
-    description: "Download Facebook videos and reels instantly in HD without any app. Secure, fast, and completely free online Facebook video downloader.",
-    url: "https://yourdomain.com/facebook-video-downloader",
+    title: "Facebook Video Downloader — Download FB Videos & Reels HD Free",
+    description: "Download Facebook videos and reels instantly in HD. No app, no login. Best free FB video downloader online.",
+    url: "https://reels.sayan.studio/facebook-video-downloader",
   },
 };
 
@@ -22,7 +37,7 @@ export default function FacebookDownloaderPage() {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "AnyClip Facebook Downloader",
-    "url": "https://yourdomain.com/facebook-video-downloader",
+    "url": "https://reels.sayan.studio/facebook-video-downloader",
     "applicationCategory": "MultimediaApplication",
     "operatingSystem": "All",
     "description": "A free tool to download Facebook videos securely.",

@@ -5,15 +5,31 @@ import BlogSection from "@/components/BlogSection";
 import Script from "next/script";
 
 export const metadata: Metadata = {
-  title: "YouTube Video Downloader - Fast & Free MP4 Download",
-  description: "Download YouTube videos and shorts instantly in high quality. Secure, fast, and completely free online YouTube downloader.",
+  title: "YouTube Video Downloader — Download YouTube Shorts & Videos MP4 Free",
+  description: "Download YouTube videos and Shorts instantly as MP4 in HD quality. No app, no login, no watermark. The fastest free online YouTube video downloader.",
+  keywords: [
+    "youtube downloader", "youtube video downloader", "download youtube video",
+    "youtube shorts downloader", "yt downloader", "youtube mp4 downloader",
+    "download youtube shorts", "youtube video download online free",
+    "save youtube video", "youtube video saver", "youtube downloader free",
+    "download youtube video without app", "youtube HD downloader",
+    "youtube to mp4", "how to download youtube video", "yt video downloader",
+    "youtube shorts download online", "youtube clip downloader",
+    "best youtube downloader", "youtube video download 1080p",
+    "youtube downloader online", "youtube video converter mp4",
+    "download yt shorts", "youtube video download kaise kare",
+    "save youtube shorts to phone", "youtube downloader no app",
+    "youtube shorts saver", "yt shorts download online free",
+    "youtube downloader 2025", "free youtube video downloader online",
+    "youtube to mp4 converter", "youtube 4k downloader free",
+  ],
   alternates: {
     canonical: "/youtube-video-downloader",
   },
   openGraph: {
-    title: "YouTube Video Downloader - Fast & Free MP4 Download",
-    description: "Download YouTube videos and shorts instantly in high quality. Secure, fast, and completely free online YouTube downloader.",
-    url: "https://yourdomain.com/youtube-video-downloader",
+    title: "YouTube Video Downloader — Download Shorts & Videos MP4 Free",
+    description: "Download YouTube videos and Shorts instantly as MP4 in HD. No app, no login. Best free YouTube downloader online.",
+    url: "https://reels.sayan.studio/youtube-video-downloader",
   },
 };
 
@@ -22,7 +38,7 @@ export default function YouTubeDownloaderPage() {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "AnyClip YouTube Downloader",
-    "url": "https://yourdomain.com/youtube-video-downloader",
+    "url": "https://reels.sayan.studio/youtube-video-downloader",
     "applicationCategory": "MultimediaApplication",
     "operatingSystem": "All",
     "description": "A free tool to download YouTube videos securely.",
