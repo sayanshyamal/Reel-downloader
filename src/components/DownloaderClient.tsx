@@ -12,6 +12,9 @@ interface VideoData {
   title: string;
   thumbnail: string;
   downloadUrl: string;
+  hdUrl?: string;
+  sdUrl?: string;
+  platform?: string;
 }
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
@@ -23,18 +26,15 @@ export default function DownloaderClient({ endpoint, placeholder }: DownloaderCl
   const [videoData, setVideoData] = useState<VideoData | null>(null);
   const [downloadingFile, setDownloadingFile] = useState(false);
 
-  const handleForceDownload = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    if (!videoData?.downloadUrl || downloadingFile) return;
+  const downloadFile = (fileUrl: string) => {
+    if (!fileUrl || downloadingFile) return;
 
     setDownloadingFile(true);
-    const proxyUrl = `/api/force-download?url=${encodeURIComponent(videoData.downloadUrl)}`;
+    const proxyUrl = `/api/force-download?url=${encodeURIComponent(fileUrl)}`;
     
-    // The browser will intercept the Content-Disposition header and download the file
-    // without navigating away from the current page.
+    // Intercept download via proxy
     window.location.href = proxyUrl;
 
-    // Reset the loading state after a brief delay so the user gets visual feedback
     setTimeout(() => {
       setDownloadingFile(false);
     }, 2500);
@@ -67,7 +67,10 @@ export default function DownloaderClient({ endpoint, placeholder }: DownloaderCl
       setVideoData({
         title: data.title || "Downloaded Video",
         thumbnail: data.thumbnail || "",
-        downloadUrl: data.downloadUrl,
+        downloadUrl: data.downloadUrl || data.hd_url || data.sd_url,
+        hdUrl: data.hdUrl || data.hd_url,
+        sdUrl: data.sdUrl || data.sd_url,
+        platform: data.platform || (endpoint.includes("facebook") ? "facebook" : ""),
       });
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "An unexpected error occurred.");
@@ -119,23 +122,49 @@ export default function DownloaderClient({ endpoint, placeholder }: DownloaderCl
               <h3 className="font-semibold text-slate-800 line-clamp-2">
                 {videoData.title}
               </h3>
-              <button
-                onClick={handleForceDownload}
-                disabled={downloadingFile}
-                className="w-full bg-pink-500 hover:bg-pink-600 disabled:bg-pink-300 text-white py-2.5 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
-              >
-                {downloadingFile ? (
-                  <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                    Starting Download...
-                  </>
-                ) : (
-                  <>
-                    <Download className="w-4 h-4" />
-                    Download Video
-                  </>
-                )}
-              </button>
+              
+              {videoData.platform === "facebook" && (videoData.hdUrl || videoData.sdUrl) ? (
+                <div className="flex flex-col sm:flex-row gap-2 w-full">
+                  {videoData.hdUrl && (
+                    <button
+                      onClick={() => downloadFile(videoData.hdUrl!)}
+                      disabled={downloadingFile}
+                      className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white py-2.5 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+                    >
+                      {downloadingFile ? <Loader2 className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
+                      Download HD
+                    </button>
+                  )}
+                  {videoData.sdUrl && (
+                    <button
+                      onClick={() => downloadFile(videoData.sdUrl!)}
+                      disabled={downloadingFile}
+                      className="w-full bg-slate-600 hover:bg-slate-700 disabled:bg-slate-400 text-white py-2.5 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+                    >
+                      {downloadingFile ? <Loader2 className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
+                      Download SD
+                    </button>
+                  )}
+                </div>
+              ) : (
+                <button
+                  onClick={() => downloadFile(videoData.downloadUrl)}
+                  disabled={downloadingFile}
+                  className="w-full bg-pink-500 hover:bg-pink-600 disabled:bg-pink-300 text-white py-2.5 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+                >
+                  {downloadingFile ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      Starting Download...
+                    </>
+                  ) : (
+                    <>
+                      <Download className="w-4 h-4" />
+                      Download Video
+                    </>
+                  )}
+                </button>
+              )}
             </div>
           </div>
         </div>
