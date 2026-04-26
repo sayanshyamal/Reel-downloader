@@ -21,6 +21,24 @@ export default function DownloaderClient({ endpoint, placeholder }: DownloaderCl
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [videoData, setVideoData] = useState<VideoData | null>(null);
+  const [downloadingFile, setDownloadingFile] = useState(false);
+
+  const handleForceDownload = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (!videoData?.downloadUrl || downloadingFile) return;
+
+    setDownloadingFile(true);
+    const proxyUrl = `/api/force-download?url=${encodeURIComponent(videoData.downloadUrl)}`;
+    
+    // The browser will intercept the Content-Disposition header and download the file
+    // without navigating away from the current page.
+    window.location.href = proxyUrl;
+
+    // Reset the loading state after a brief delay so the user gets visual feedback
+    setTimeout(() => {
+      setDownloadingFile(false);
+    }, 2500);
+  };
 
   const handleDownload = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -75,7 +93,7 @@ export default function DownloaderClient({ endpoint, placeholder }: DownloaderCl
           className="bg-indigo-500 hover:bg-indigo-600 disabled:bg-indigo-300 text-white px-6 py-3 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 min-w-[140px]"
         >
           {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Download className="w-5 h-5" />}
-          {loading ? "Fetching..." : "Download"}
+          {loading ? "Fetching..." : "Fetch Video"}
         </button>
       </form>
 
@@ -101,16 +119,23 @@ export default function DownloaderClient({ endpoint, placeholder }: DownloaderCl
               <h3 className="font-semibold text-slate-800 line-clamp-2">
                 {videoData.title}
               </h3>
-              <a
-                href={videoData.downloadUrl}
-                target="_blank"
-                rel="noreferrer noopener"
-                download
-                className="w-full bg-pink-500 hover:bg-pink-600 text-white py-2.5 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+              <button
+                onClick={handleForceDownload}
+                disabled={downloadingFile}
+                className="w-full bg-pink-500 hover:bg-pink-600 disabled:bg-pink-300 text-white py-2.5 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
               >
-                <Download className="w-4 h-4" />
-                Download Video
-              </a>
+                {downloadingFile ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    Starting Download...
+                  </>
+                ) : (
+                  <>
+                    <Download className="w-4 h-4" />
+                    Download Video
+                  </>
+                )}
+              </button>
             </div>
           </div>
         </div>
