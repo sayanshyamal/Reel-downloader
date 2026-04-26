@@ -1,19 +1,35 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Instagram, Facebook, Youtube } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Logo from "./Logo";
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
   const navLinks = [
-    { name: "Instagram", href: "/instagram-downloader" },
-    { name: "Facebook", href: "/facebook-video-downloader" },
-    { name: "YouTube", href: "/youtube-video-downloader" },
+    { 
+      name: "Instagram", 
+      href: "/instagram-downloader", 
+      icon: Instagram, 
+      activeColor: "text-pink-600 bg-pink-50",
+      desktopActive: "text-pink-600 bg-pink-50"
+    },
+    { 
+      name: "Facebook", 
+      href: "/facebook-video-downloader", 
+      icon: Facebook, 
+      activeColor: "text-blue-600 bg-blue-50",
+      desktopActive: "text-blue-600 bg-blue-50"
+    },
+    { 
+      name: "YouTube", 
+      href: "/youtube-video-downloader", 
+      icon: Youtube, 
+      activeColor: "text-red-600 bg-red-50",
+      desktopActive: "text-red-600 bg-red-50"
+    },
   ];
 
   return (
@@ -35,8 +51,8 @@ export default function Navbar() {
                     href={link.href}
                     className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                       isActive
-                        ? "text-indigo-600 bg-indigo-50"
-                        : "text-slate-600 hover:text-indigo-500 hover:bg-slate-50"
+                        ? link.desktopActive
+                        : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
                     }`}
                   >
                     {link.name}
@@ -46,48 +62,29 @@ export default function Navbar() {
             </div>
           </div>
           
-          {/* Mobile menu button */}
-          <div className="md:hidden flex items-center">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-slate-600 hover:text-indigo-500 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
-              aria-expanded={isOpen}
-            >
-              <span className="sr-only">Open main menu</span>
-              {isOpen ? (
-                <X className="block h-6 w-6" aria-hidden="true" />
-              ) : (
-                <Menu className="block h-6 w-6" aria-hidden="true" />
-              )}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      {isOpen && (
-        <div className="md:hidden bg-white/95 backdrop-blur-lg border-b border-slate-200 absolute w-full shadow-lg">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          {/* Mobile Menu (Side-by-side Icons) */}
+          <div className="flex md:hidden items-center space-x-2">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
+              const Icon = link.icon;
               return (
                 <Link
                   key={link.name}
                   href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className={`block px-3 py-2 rounded-md text-base font-medium ${
+                  aria-label={link.name}
+                  className={`p-2 rounded-full transition-colors ${
                     isActive
-                      ? "text-indigo-600 bg-indigo-50"
-                      : "text-slate-700 hover:text-indigo-500 hover:bg-slate-50"
+                      ? link.activeColor
+                      : "text-slate-500 hover:text-slate-900 hover:bg-slate-100"
                   }`}
                 >
-                  {link.name}
+                  <Icon className="w-5 h-5" strokeWidth={isActive ? 2.5 : 2} />
                 </Link>
               );
             })}
           </div>
         </div>
-      )}
+      </div>
     </nav>
   );
 }
