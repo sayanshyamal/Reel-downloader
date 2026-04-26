@@ -88,13 +88,14 @@ export async function handleYouTube(req, res) {
     let info;
     try {
       // yt-dlp is extremely robust and will not hang on dead links like play-dl
-      // Bypass datacenter IP Blocks by forcing mobile clients (iOS/Android)
+      // Bypass datacenter IP Blocks by forcing IPv6 and mobile clients (iOS/Android)
       info = await ytDlp(trimmedUrl, {
         dumpJson: true,
         noWarnings: true,
         preferFreeFormats: true,
         noCallHome: true,
         noCheckCertificate: true,
+        forceIpv6: true, // Extreme IP block bypass
         extractorArgs: "youtube:player_client=ios,android,web"
       });
     } catch (innerErr) {
@@ -108,15 +109,17 @@ export async function handleYouTube(req, res) {
       if (msg.includes("private")) {
         return fail(res, "This YouTube video is private and cannot be downloaded.", 403);
       }
-      if (msg.includes("sign in") || msg.includes("age")) {
-        return fail(res, "This video is age-restricted. Age-restricted videos are not supported.", 403);
-      }
+      // FIRST check for the bot-check string to avoid confusing it with age-restriction
       if (msg.includes("429") || msg.includes("bot") || msg.includes("sign in to confirm")) {
          return fail(
           res,
           "YouTube is temporarily blocking downloads from this server IP. Please try another video or try again later.",
           400
         );
+      }
+      // THEN check for age restriction
+      if (msg.includes("sign in") || msg.includes("age")) {
+        return fail(res, "This video is age-restricted. Age-restricted videos are not supported.", 403);
       }
 
       return fail(
