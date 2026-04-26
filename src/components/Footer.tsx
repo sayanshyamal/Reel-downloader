@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Video } from "lucide-react";
+import Logo from "./Logo";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -8,15 +8,10 @@ export default function Footer() {
     <footer className="bg-slate-900 text-slate-300 py-12 mt-16 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="col-span-1 md:col-span-2">
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="bg-indigo-500 p-1.5 rounded-lg">
-                <Video className="h-5 w-5 text-white" />
-              </div>
-              <span className="font-bold text-xl tracking-tight text-white">
-                Any<span className="text-indigo-500">Clip</span>
-              </span>
-            </Link>
+          <div className="col-span-1 md:col-span-1">
+            <div className="mb-4">
+              <Logo size="md" variant="light" />
+            </div>
             <p className="text-sm text-slate-400 max-w-sm">
               AnyClip is a free, fast, and secure tool to download your favorite videos from Instagram, Facebook, and YouTube straight to your device.
             </p>
@@ -38,6 +33,37 @@ export default function Footer() {
               <li>
                 <Link href="/youtube-video-downloader" className="hover:text-indigo-400 transition-colors">
                   YouTube Downloader
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-white font-semibold mb-4 tracking-wide">Resources</h3>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <Link href="/instagram-downloader#how-to-download" className="hover:text-indigo-400 transition-colors">
+                  How to Download Reels
+                </Link>
+              </li>
+              <li>
+                <Link href="/facebook-video-downloader#how-to-download" className="hover:text-indigo-400 transition-colors">
+                  How to Download FB Videos
+                </Link>
+              </li>
+              <li>
+                <Link href="/youtube-video-downloader#how-to-download" className="hover:text-indigo-400 transition-colors">
+                  How to Download YT Videos
+                </Link>
+              </li>
+              <li>
+                <Link href="/instagram-downloader#blog" className="hover:text-indigo-400 transition-colors">
+                  Instagram Download Guide
+                </Link>
+              </li>
+              <li>
+                <Link href="/youtube-video-downloader#blog" className="hover:text-indigo-400 transition-colors">
+                  YouTube Download Guide
                 </Link>
               </li>
             </ul>

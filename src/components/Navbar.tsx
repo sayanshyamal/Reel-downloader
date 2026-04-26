@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X, Video } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
+import Logo from "./Logo";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,14 +21,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="bg-indigo-500 p-1.5 rounded-lg">
-                <Video className="h-6 w-6 text-white" />
-              </div>
-              <span className="font-bold text-xl tracking-tight text-slate-900">
-                Any<span className="text-indigo-500">Clip</span>
-              </span>
-            </Link>
+            <Logo size="sm" variant="dark" />
           </div>
           
           {/* Desktop Menu */}

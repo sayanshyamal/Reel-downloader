@@ -14,6 +14,8 @@ interface VideoData {
   downloadUrl: string;
 }
 
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+
 export default function DownloaderClient({ endpoint, placeholder }: DownloaderClientProps) {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
@@ -32,22 +34,21 @@ export default function DownloaderClient({ endpoint, placeholder }: DownloaderCl
     setVideoData(null);
 
     try {
-      // In production, your backend should be running to handle this endpoint
-      // e.g., const res = await fetch(`http://localhost:5000${endpoint}`, { ... })
-      const res = await fetch(endpoint, {
+      const res = await fetch(`${API_BASE}${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url }),
       });
 
-      if (!res.ok) {
-        throw new Error("Failed to fetch video. Please check the URL.");
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || "Failed to fetch video. Please check the URL.");
       }
 
-      const data = await res.json();
       setVideoData({
         title: data.title || "Downloaded Video",
-        thumbnail: data.thumbnail || "https://placehold.co/600x400?text=Video+Thumbnail",
+        thumbnail: data.thumbnail || "",
         downloadUrl: data.downloadUrl,
       });
     } catch (err: unknown) {
@@ -80,7 +81,7 @@ export default function DownloaderClient({ endpoint, placeholder }: DownloaderCl
 
       {error && (
         <div className="mt-4 p-4 bg-red-50 text-red-600 rounded-xl flex items-center gap-2 border border-red-200">
-          <AlertCircle className="w-5 h-5" />
+          <AlertCircle className="w-5 h-5 shrink-0" />
           <p>{error}</p>
         </div>
       )}
@@ -88,12 +89,14 @@ export default function DownloaderClient({ endpoint, placeholder }: DownloaderCl
       {videoData && (
         <div className="mt-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
           <div className="bg-slate-50 rounded-xl p-4 border border-slate-200 flex flex-col sm:flex-row gap-6 items-center sm:items-start">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img 
-              src={videoData.thumbnail} 
-              alt={videoData.title} 
-              className="w-full sm:w-48 h-auto rounded-lg object-cover shadow-sm"
-            />
+            {videoData.thumbnail && (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img 
+                src={videoData.thumbnail} 
+                alt={videoData.title} 
+                className="w-full sm:w-48 h-auto rounded-lg object-cover shadow-sm"
+              />
+            )}
             <div className="flex-grow flex flex-col justify-between w-full h-full space-y-4">
               <h3 className="font-semibold text-slate-800 line-clamp-2">
                 {videoData.title}
