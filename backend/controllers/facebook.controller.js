@@ -38,7 +38,7 @@ async function resolveShortUrl(url) {
 
 // ─── Extract video URLs from Facebook page HTML ──────────────────────────────
 function extractVideoUrls(html) {
-  const urls = { hd: null, sd: null, title: null };
+  const urls = { hd: null, sd: null, title: null, thumbnail: null };
 
   // ── HD URL patterns ──────────────────────────────────────────────────────
   const hdPatterns = [
@@ -63,6 +63,12 @@ function extractVideoUrls(html) {
     /<title[^>]*>([^<]+)<\/title>/i,
     /property="og:title"\s+content="([^"]+)"/i,
     /name="description"\s+content="([^"]+)"/i,
+  ];
+
+  // ── Thumbnail patterns ───────────────────────────────────────────────────
+  const thumbnailPatterns = [
+    /property="og:image"\s+content="([^"]+)"/i,
+    /"thumbnail_url"\s*:\s*"([^"]+)"/i,
   ];
 
   const decode = (str) =>
@@ -94,6 +100,14 @@ function extractVideoUrls(html) {
     const m = html.match(p);
     if (m) {
       urls.title = m[1].trim();
+      break;
+    }
+  }
+
+  for (const p of thumbnailPatterns) {
+    const m = html.match(p);
+    if (m) {
+      urls.thumbnail = decode(m[1]);
       break;
     }
   }
@@ -140,7 +154,7 @@ export async function handleFacebook(req, res) {
     console.log(`📘 Processing Facebook: ${resolvedUrl}`);
 
     // Try mobile page first (lighter HTML, easier to parse)
-    let result = { hd: null, sd: null, title: null };
+    let result = { hd: null, sd: null, title: null, thumbnail: null };
 
     try {
       const mobileHtml = await fetchFacebookPage(
@@ -174,7 +188,7 @@ export async function handleFacebook(req, res) {
 
     return ok(res, {
       title: result.title || "Facebook Video",
-      thumbnail: "",
+      thumbnail: result.thumbnail || "",
       downloadUrl,
       hdUrl: result.hd || null,
       sdUrl: result.sd || null,
