@@ -2,10 +2,8 @@
  * Instagram Video / Reel Extractor
  * ---------------------------------
  * Strategy 1 → instagram-url-direct package (most reliable)
- * Strategy 2 → Embed page scraping fallback
- *
- * If Instagram changes its HTML structure, Strategy 1 (package) is the
- * first thing to update — just bump the package version.
+ * Strategy 2 → GraphQL / Additional Data extraction from Page Source
+ * Strategy 3 → Embed page scraping fallback
  */
 
 import axios from "axios";
@@ -14,8 +12,24 @@ import instagramDl from "instagram-url-direct";
 import { isValidInstagramUrl, normaliseInstagramUrl, extractInstagramShortcode } from "../utils/validators.js";
 import { ok, fail } from "../utils/response.js";
 
-const BROWSER_UA =
-  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
+const getHeaders = () => {
+  // Rotate or use a very standard UA to avoid immediate blocks
+  return {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Connection": "keep-alive",
+    "Upgrade-Insecure-Requests": "1",
+    "Sec-Fetch-Dest": "document",
+    "Sec-Fetch-Mode": "navigate",
+    "Sec-Fetch-Site": "none",
+    "Sec-Fetch-User": "?1",
+    "Cache-Control": "max-age=0",
+  };
+};
+
+const cleanUrl = (url) => url.replace(/\\u0026/g, "&").replace(/\\\//g, "/");
 
 // ─── Strategy 1: instagram-url-direct ────────────────────────────────────────
 async function extractViaPackage(url) {
@@ -28,6 +42,8 @@ async function extractViaPackage(url) {
       downloadUrl: result.url_list[0],
       allUrls: result.url_list,
       source: "instagram-url-direct",
+      title: "Instagram Video",
+      thumbnail: ""
     };
   } catch (err) {
     console.warn("⚠ instagram-url-direct failed:", err.message);
@@ -35,95 +51,121 @@ async function extractViaPackage(url) {
   }
 }
 
-// ─── Strategy 2: Embed page scraping ─────────────────────────────────────────
+// ─── Strategy 2: Page Source Scraping (GraphQL / AdditionalData) ─────────────
+async function extractViaPageSource(url) {
+  try {
+    const { data: html } = await axios.get(url, {
+      headers: getHeaders(),
+      timeout: 15000,
+    });
+
+    let downloadUrl = null;
+    let title = "Instagram Video";
+    let thumbnail = "";
+
+    // Method A: Look for "video_url" directly in the raw HTML string
+    // Instagram often embeds state like "video_url":"https://..."
+    const videoUrlMatch = html.match(/"video_url":"(https?:[^"]+)"/);
+    if (videoUrlMatch) {
+      downloadUrl = cleanUrl(videoUrlMatch[1]);
+    }
+
+    // Method B: Look inside GraphQL / xdt_shortcode_media json payload
+    if (!downloadUrl) {
+      // Find script tags containing 'xdt_shortcode_media' or 'video_versions'
+      const $ = cheerio.load(html);
+      $('script').each((_, el) => {
+        const scriptContent = $(el).html() || "";
+        if (scriptContent.includes("video_url") || scriptContent.includes("video_versions")) {
+          // Try to match the video_url pattern again just in case
+          const urlMatch = scriptContent.match(/"video_url":"(https?:[^"]+)"/);
+          if (urlMatch) {
+            downloadUrl = cleanUrl(urlMatch[1]);
+          } else {
+            // Sometimes it's inside video_versions array
+            const versionMatch = scriptContent.match(/"url":"(https?:[^"]+)"/g);
+            if (versionMatch && versionMatch.length > 0) {
+              // Take the first one (usually highest quality)
+              const firstMatch = versionMatch[0].match(/"url":"(https?:[^"]+)"/);
+              if (firstMatch) downloadUrl = cleanUrl(firstMatch[1]);
+            }
+          }
+        }
+      });
+    }
+
+    // Get metadata
+    const $ = cheerio.load(html);
+    thumbnail = $('meta[property="og:image"]').attr('content') || "";
+    title = $('meta[property="og:title"]').attr('content') || "Instagram Video";
+
+    // Method C: og:video tag fallback
+    if (!downloadUrl) {
+      const ogVideo = $('meta[property="og:video"]').attr('content');
+      if (ogVideo) {
+        downloadUrl = cleanUrl(ogVideo);
+      }
+    }
+
+    if (downloadUrl) {
+      return {
+        downloadUrl,
+        allUrls: [downloadUrl],
+        source: "page-source",
+        title,
+        thumbnail
+      };
+    }
+    return null;
+  } catch (err) {
+    console.warn("⚠ Page source scrape failed:", err.message);
+    return null;
+  }
+}
+
+// ─── Strategy 3: Embed page scraping ─────────────────────────────────────────
 async function extractViaEmbed(shortcode) {
   try {
     const embedUrl = `https://www.instagram.com/p/${shortcode}/embed/captioned/`;
     const { data: html } = await axios.get(embedUrl, {
-      headers: {
-        "User-Agent": BROWSER_UA,
-        Accept: "text/html,application/xhtml+xml",
-        "Accept-Language": "en-US,en;q=0.9",
-        Referer: "https://www.instagram.com/",
-      },
+      headers: getHeaders(),
       timeout: 15000,
     });
 
-    // Try to find video_url in the embedded JSON data
+    let downloadUrl = null;
+    let thumbnail = "";
+
+    // Method A: Check script tags in embed
     const videoUrlMatch = html.match(/"video_url":"(.*?)"/);
     if (videoUrlMatch) {
-      const videoUrl = videoUrlMatch[1].replace(/\\u0026/g, "&").replace(/\\\//g, "/");
-      return {
-        downloadUrl: videoUrl,
-        allUrls: [videoUrl],
-        source: "embed-scrape",
-      };
+      downloadUrl = cleanUrl(videoUrlMatch[1]);
     }
 
-    // Try to find og:video meta tag
     const $ = cheerio.load(html);
-    const ogVideo = $('meta[property="og:video"]').attr("content");
-    if (ogVideo) {
-      return {
-        downloadUrl: ogVideo,
-        allUrls: [ogVideo],
-        source: "embed-og-tag",
-      };
+    
+    // Method B: Check video source
+    if (!downloadUrl) {
+      const videoSrc = $("video source").attr("src") || $("video").attr("src");
+      if (videoSrc) {
+        downloadUrl = cleanUrl(videoSrc);
+      }
     }
 
-    // Try extracting from the video element directly
-    const videoSrc = $("video source").attr("src") || $("video").attr("src");
-    if (videoSrc) {
+    thumbnail = $('.EmbeddedMediaImage').attr('src') || $('img').attr('src') || "";
+
+    if (downloadUrl) {
       return {
-        downloadUrl: videoSrc,
-        allUrls: [videoSrc],
-        source: "embed-video-tag",
+        downloadUrl,
+        allUrls: [downloadUrl],
+        source: "embed-scrape",
+        title: `Instagram Video - ${shortcode}`,
+        thumbnail
       };
     }
 
     return null;
   } catch (err) {
     console.warn("⚠ Embed scrape failed:", err.message);
-    return null;
-  }
-}
-
-// ─── Strategy 3: Page source scraping ────────────────────────────────────────
-async function extractViaPageSource(url) {
-  try {
-    const { data: html } = await axios.get(url, {
-      headers: {
-        "User-Agent": BROWSER_UA,
-        Accept: "text/html,application/xhtml+xml",
-        "Accept-Language": "en-US,en;q=0.9",
-        Cookie: "",
-      },
-      timeout: 15000,
-      maxRedirects: 5,
-    });
-
-    // Look for video_url in page source (JSON-LD or embedded data)
-    const patterns = [
-      /"video_url":"(https?:[^"]+)"/,
-      /"contentUrl":"(https?:[^"]+)"/,
-      /video_url\\?":\\?"(https?:[^"\\]+)/,
-    ];
-
-    for (const pattern of patterns) {
-      const match = html.match(pattern);
-      if (match) {
-        const videoUrl = match[1].replace(/\\u0026/g, "&").replace(/\\\//g, "/");
-        return {
-          downloadUrl: videoUrl,
-          allUrls: [videoUrl],
-          source: "page-source",
-        };
-      }
-    }
-
-    return null;
-  } catch (err) {
-    console.warn("⚠ Page source scrape failed:", err.message);
     return null;
   }
 }
@@ -151,28 +193,32 @@ export async function handleInstagram(req, res) {
 
     console.log(`📸 Processing Instagram: ${shortcode || trimmedUrl}`);
 
-    // Try each strategy in order of reliability
+    // Tier 1: Try package first
     let result = await extractViaPackage(normalised);
 
-    if (!result && shortcode) {
-      result = await extractViaEmbed(shortcode);
-    }
-
+    // Tier 2: Try Page Source (GraphQL / AdditionalData)
     if (!result) {
+      console.log("Tier 1 failed. Trying Tier 2 (Page Source)...");
       result = await extractViaPageSource(normalised);
     }
 
-    if (!result) {
+    // Tier 3: Try Embed Scraping
+    if (!result && shortcode) {
+      console.log("Tier 2 failed. Trying Tier 3 (Embed Scraping)...");
+      result = await extractViaEmbed(shortcode);
+    }
+
+    if (!result || !result.downloadUrl) {
       return fail(
         res,
-        "Could not extract video from this Instagram URL. The post may be private, deleted, or Instagram may have changed their page structure.",
+        "Could not extract video from this Instagram URL. The post may be private, deleted, or Instagram may have blocked the request.",
         422
       );
     }
 
     return ok(res, {
-      title: `Instagram Video - ${shortcode || "Post"}`,
-      thumbnail: "",
+      title: result.title || `Instagram Video - ${shortcode || "Post"}`,
+      thumbnail: result.thumbnail || "",
       downloadUrl: result.downloadUrl,
       allUrls: result.allUrls,
       platform: "instagram",
