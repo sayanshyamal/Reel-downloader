@@ -146,6 +146,24 @@ export default function DownloaderClient({ endpoint, placeholder }: DownloaderCl
                     </button>
                   )}
                 </div>
+              ) : videoData.platform === "youtube" ? (
+                <button
+                  onClick={() => downloadFile(videoData.downloadUrl)}
+                  disabled={downloadingFile}
+                  className="w-full bg-red-600 hover:bg-red-700 disabled:bg-red-400 text-white py-2.5 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+                >
+                  {downloadingFile ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      Starting Download...
+                    </>
+                  ) : (
+                    <>
+                      <Download className="w-4 h-4" />
+                      Download Video
+                    </>
+                  )}
+                </button>
               ) : (
                 <button
                   onClick={() => downloadFile(videoData.downloadUrl)}
