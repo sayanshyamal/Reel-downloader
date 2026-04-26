@@ -22,11 +22,10 @@ const FACEBOOK_PATTERNS = [
 ];
 
 const YOUTUBE_PATTERNS = [
-  /^https?:\/\/(www\.)?youtube\.com\/watch\?v=[A-Za-z0-9_-]{11}/i,
-  /^https?:\/\/youtu\.be\/[A-Za-z0-9_-]{11}/i,
-  /^https?:\/\/(www\.)?youtube\.com\/shorts\/[A-Za-z0-9_-]{11}/i,
-  /^https?:\/\/(www\.)?youtube\.com\/embed\/[A-Za-z0-9_-]{11}/i,
-  /^https?:\/\/m\.youtube\.com\/watch\?v=[A-Za-z0-9_-]{11}/i,
+  /^https?:\/\/(www\.|m\.)?youtube\.com\/watch\?.*v=[A-Za-z0-9_-]{11}(?:&|$)/i,
+  /^https?:\/\/youtu\.be\/[A-Za-z0-9_-]{11}(?:\?|$)/i,
+  /^https?:\/\/(www\.|m\.)?youtube\.com\/shorts\/[A-Za-z0-9_-]{11}(?:\?|$)/i,
+  /^https?:\/\/(www\.|m\.)?youtube\.com\/embed\/[A-Za-z0-9_-]{11}(?:\?|$)/i,
 ];
 
 export const isValidInstagramUrl = (url) =>
