@@ -75,6 +75,7 @@ function extractVideoUrls(html) {
     str
       .replace(/\\u0025/g, "%")
       .replace(/\\u0026/g, "&")
+      .replace(/&amp;/g, "&")
       .replace(/\\\//g, "/")
       .replace(/\\x([0-9A-Fa-f]{2})/g, (_, hex) =>
         String.fromCharCode(parseInt(hex, 16))
