@@ -11,7 +11,7 @@
  * and is far more resilient to changes.
  */
 
-import play from "play-dl";
+import ytDlp from "youtube-dl-exec";
 import { isValidYouTubeUrl } from "../utils/validators.js";
 import { ok, fail } from "../utils/response.js";
 
@@ -23,23 +23,20 @@ function buildFormatList(formats) {
   const audioOnly = [];
 
   for (const f of formats) {
-    const entry = {
-      itag: f.itag,
-      url: f.url,
-      mimeType: f.mimeType || "",
-      quality: f.qualityLabel || f.quality || "unknown",
-      bitrate: f.bitrate || 0,
-      fps: f.fps || null,
-      // In play-dl, if it has qualityLabel and audioQuality, it's muxed
-      hasAudio: !!f.audioQuality || !!f.audioSampleRate,
-      hasVideo: !!f.qualityLabel,
-      contentLength: f.contentLength || null,
-      container: "mp4", // default fallback
-    };
+    // Only care about mp4/webm for standard web playback
+    if (f.ext !== "mp4" && f.ext !== "webm") continue;
 
-    if (entry.mimeType.includes("mp4") || entry.mimeType.includes("webm")) {
-      entry.container = entry.mimeType.split(";")[0].split("/")[1];
-    }
+    const entry = {
+      itag: f.format_id,
+      url: f.url,
+      mimeType: f.ext,
+      quality: f.format_note || f.height ? `${f.height}p` : "unknown",
+      bitrate: f.tbr || 0,
+      fps: f.fps || null,
+      hasAudio: f.acodec !== "none" && f.acodec !== null,
+      hasVideo: f.vcodec !== "none" && f.vcodec !== null,
+      container: f.ext,
+    };
 
     if (entry.hasAudio && entry.hasVideo) {
       muxed.push(entry);
@@ -73,11 +70,6 @@ function selectBestDownload(formatGroups) {
   return null;
 }
 
-// Configure play-dl with a generic browser User-Agent to bypass basic datacenter blocks
-play.setToken({
-  useragent: ["Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"]
-});
-
 // ─── Main Controller ─────────────────────────────────────────────────────────
 export async function handleYouTube(req, res) {
   try {
@@ -92,51 +84,45 @@ export async function handleYouTube(req, res) {
     if (!isValidYouTubeUrl(trimmedUrl)) {
       return fail(
         res,
-        "Invalid YouTube URL. Please provide a valid YouTube video or Shorts link."
+        "Invalid YouTube URL. Please provide a valid YouTube video or Shorts link.",
+        400
       );
     }
 
-    console.log(`🔴 Processing YouTube: ${trimmedUrl}`);
+    console.log(`🔴 Processing YouTube via yt-dlp: ${trimmedUrl}`);
 
     let info;
     try {
-      const fetchPromise = play.video_info(trimmedUrl);
-      const timeoutPromise = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error("Request timed out or IP blocked")), 10000)
-      );
-      
-      info = await Promise.race([fetchPromise, timeoutPromise]);
+      // yt-dlp is extremely robust and will not hang on dead links like play-dl
+      info = await ytDlp(trimmedUrl, {
+        dumpJson: true,
+        noWarnings: true,
+        preferFreeFormats: true,
+        noCallHome: true,
+        noCheckCertificate: true,
+      });
     } catch (innerErr) {
-      console.error("play-dl video_info failed:", innerErr.message);
+      console.error("yt-dlp failed:", innerErr.message);
 
       const msg = innerErr.message.toLowerCase();
 
-      // Catch strict IP blocks, bot checks, and timeouts
-      if (
-        msg.includes("timed out") ||
-        msg.includes("429") ||
-        msg.includes("400") ||
-        msg.includes("bot") ||
-        msg.includes("sign in") ||
-        msg.includes("miniget")
-      ) {
-        return fail(
+      if (msg.includes("video unavailable") || msg.includes("not available")) {
+        return fail(res, "This YouTube video is unavailable, deleted, or the link is broken.", 404);
+      }
+      if (msg.includes("private")) {
+        return fail(res, "This YouTube video is private and cannot be downloaded.", 403);
+      }
+      if (msg.includes("sign in") || msg.includes("age")) {
+        return fail(res, "This video is age-restricted. Age-restricted videos are not supported.", 403);
+      }
+      if (msg.includes("429") || msg.includes("bot")) {
+         return fail(
           res,
           "YouTube is temporarily blocking downloads from this server IP. Please try another video or try again later.",
           400
         );
       }
 
-      if (msg.includes("private")) {
-        return fail(res, "This YouTube video is private and cannot be downloaded.", 403);
-      }
-      if (msg.includes("age")) {
-        return fail(res, "This video is age-restricted. Age-restricted videos are not supported.", 403);
-      }
-      if (msg.includes("unavailable") || msg.includes("not available") || msg.includes("410")) {
-        return fail(res, "This YouTube video is unavailable or has been removed.", 404);
-      }
-      
       return fail(
         res,
         "Failed to fetch YouTube video info. The video might be restricted or the service is temporarily unavailable.",
@@ -144,10 +130,7 @@ export async function handleYouTube(req, res) {
       );
     }
 
-    const videoDetails = info.video_details;
-    const allFormats = info.format || [];
-
-    const formatGroups = buildFormatList(allFormats);
+    const formatGroups = buildFormatList(info.formats || []);
     const bestFormat = selectBestDownload(formatGroups);
 
     if (!bestFormat) {
@@ -162,16 +145,14 @@ export async function handleYouTube(req, res) {
     }));
 
     return ok(res, {
-      title: videoDetails.title || "YouTube Video",
-      thumbnail: videoDetails.thumbnails?.[videoDetails.thumbnails.length - 1]?.url || "",
+      title: info.title || "YouTube Video",
+      thumbnail: info.thumbnail || "",
       downloadUrl: bestFormat.url,
-      duration: videoDetails.durationInSec
-        ? `${Math.floor(videoDetails.durationInSec / 60)}:${String(
-            videoDetails.durationInSec % 60
-          ).padStart(2, "0")}`
+      duration: info.duration
+        ? `${Math.floor(info.duration / 60)}:${String(info.duration % 60).padStart(2, "0")}`
         : null,
-      author: videoDetails.channel?.name || "",
-      viewCount: videoDetails.views || null,
+      author: info.uploader || "",
+      viewCount: info.view_count || null,
       platform: "youtube",
       quality: bestFormat.quality,
       availableQualities,

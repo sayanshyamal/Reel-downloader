@@ -15,7 +15,8 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "instagram-url-direct": "^2.0.7",
-    "play-dl": "^1.9.7"
+    "play-dl": "^1.9.7",
+    "youtube-dl-exec": "^3.1.5"
   },
   "devDependencies": {
     "nodemon": "^3.1.9"
