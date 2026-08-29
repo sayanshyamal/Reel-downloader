@@ -5,7 +5,11 @@
 
 const INSTAGRAM_PATTERNS = [
   /^https?:\/\/(www\.)?instagram\.com\/(p|reel|reels|tv)\/[A-Za-z0-9_-]+/i,
-  /^https?:\/\/instagr\.am\/p\/[A-Za-z0-9_-]+/i,
+  /^https?:\/\/(www\.)?instagram\.com\/stories\/[A-Za-z0-9_.]+(?:\/[0-9]+)?/i,
+  /^https?:\/\/(www\.)?instagram\.com\/share\/(?:p|r|v)?\/?[A-Za-z0-9_-]+/i,
+  /^https?:\/\/(www\.)?instagram\.com\/[A-Za-z0-9_.]+\/(?:p|reel|reels)\/[A-Za-z0-9_-]+/i,
+  /^https?:\/\/instagr\.am\/(?:p|reel)\/[A-Za-z0-9_-]+/i,
+  /^https?:\/\/(www\.)?instagram\.com\/audio\/[0-9]+/i,
 ];
 
 const FACEBOOK_PATTERNS = [
@@ -42,9 +46,25 @@ export const isValidYouTubeUrl = (url) =>
  */
 export function extractInstagramShortcode(url) {
   const match = url.match(
-    /instagram\.com\/(?:p|reel|reels|tv)\/([A-Za-z0-9_-]+)/i
+    /instagram\.com\/(?:p|reel|reels|tv|share\/[prv]?)\/([A-Za-z0-9_-]+)/i
   );
   return match ? match[1] : null;
+}
+
+/**
+ * Extract story username and story ID if it is a story URL.
+ */
+export function extractInstagramStoryInfo(url) {
+  const match = url.match(
+    /instagram\.com\/stories\/([A-Za-z0-9_.]+)(?:\/([0-9]+))?/i
+  );
+  if (match) {
+    return {
+      username: match[1],
+      storyId: match[2] || null,
+    };
+  }
+  return null;
 }
 
 /**
@@ -52,5 +72,8 @@ export function extractInstagramShortcode(url) {
  */
 export function normaliseInstagramUrl(url) {
   const shortcode = extractInstagramShortcode(url);
-  return shortcode ? `https://www.instagram.com/p/${shortcode}/` : url;
+  if (shortcode) {
+    return `https://www.instagram.com/p/${shortcode}/`;
+  }
+  return url;
 }

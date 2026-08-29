@@ -1,34 +1,61 @@
 import { Metadata } from "next";
-import DownloaderClient from "@/components/DownloaderClient";
-import HowToDownload from "@/components/HowToDownload";
-import BlogSection from "@/components/BlogSection";
+import { Suspense } from "react";
+import InstagramDownloaderView from "@/components/InstagramDownloaderView";
 import Script from "next/script";
 
 export const metadata: Metadata = {
-  title: "Instagram Reel & Video Downloader — Download Reels HD Free Online",
-  description: "Download Instagram Reels, Videos, IGTV, Photos and Stories instantly in 1080p HD. No app, no login, no watermark. The fastest free Instagram video downloader online.",
+  title:
+    "Instagram Reel Downloader — Download Reels in 1080p HD Free Online",
+  description:
+    "Download Instagram Reels in Full HD 1080p MP4 quality instantly. No watermark, no login, no app required. The fastest free Instagram Reel saver online — paste the link and save directly to your phone or PC.",
   keywords: [
-    "instagram downloader", "instagram reel downloader", "instagram video downloader",
-    "download instagram reels", "save instagram video", "instagram reel saver",
-    "ig downloader", "ig reel downloader", "instagram reels download online",
-    "download reels from instagram", "insta video downloader", "insta reel download",
-    "instagram story downloader", "download instagram video online free",
-    "instagram reel download without app", "save reels without watermark",
-    "instagram video saver online", "how to download instagram reels",
-    "instagram photo downloader", "download instagram post",
-    "instagram downloader HD", "instagram reel to mp4",
-    "copy paste instagram downloader", "best instagram downloader",
-    "instagram video download 1080p", "reel download kaise kare",
-    "instagram downloader online", "instagram save video",
-    "download reel without login", "free instagram downloader 2025",
+    "instagram reel downloader",
+    "download instagram reels",
+    "instagram reel saver",
+    "ig reel downloader",
+    "instagram reels download online",
+    "download reels from instagram",
+    "insta reel download",
+    "instagram reel download without app",
+    "save reels without watermark",
+    "how to download instagram reels",
+    "instagram reel to mp4",
+    "copy paste instagram reel downloader",
+    "best instagram reel downloader",
+    "instagram reel download 1080p",
+    "reel download kaise kare",
+    "instagram reel downloader online",
+    "save instagram reels to phone",
+    "download reel without login",
+    "free instagram reel downloader 2025",
+    "instagram reels video download",
+    "insta reels saver online free",
+    "download ig reels HD",
+    "instagram reels downloader no watermark",
+    "save reels to gallery",
+    "instagram reel download app alternative",
+    "online reel saver free",
+    "download instagram reels mp4",
+    "reel download online free HD",
+    "instagram reel video saver",
+    "fast reel downloader",
   ],
   alternates: {
     canonical: "/instagram-downloader",
   },
   openGraph: {
-    title: "Instagram Reel & Video Downloader — Download Reels HD Free",
-    description: "Download Instagram Reels, Videos and Photos instantly in 1080p HD. No app, no login. Fastest free Instagram downloader.",
+    title: "Instagram Reel Downloader — Download Reels HD 1080p Free",
+    description:
+      "Save Instagram Reels instantly in Full HD 1080p. No app, no login, no watermark. Fastest free online Instagram Reel downloader.",
     url: "https://reels.sayan.studio/instagram-downloader",
+    siteName: "AnyClip",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Instagram Reel Downloader — HD 1080p Free",
+    description:
+      "Download Instagram Reels in 1080p HD. Free, fast, no watermark. Just paste the link and save.",
   },
 };
 
@@ -36,72 +63,119 @@ export default function InstagramDownloaderPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "AnyClip Instagram Downloader",
-    "url": "https://reels.sayan.studio/instagram-downloader",
-    "applicationCategory": "MultimediaApplication",
-    "operatingSystem": "All",
-    "description": "A free tool to download Instagram reels and videos securely.",
-    "offers": {
+    name: "AnyClip Instagram Reel Downloader",
+    url: "https://reels.sayan.studio/instagram-downloader",
+    applicationCategory: "MultimediaApplication",
+    operatingSystem: "All",
+    description:
+      "Free online tool to download Instagram Reels in Full HD 1080p MP4 without watermark. Works on any device — no login required.",
+    offers: {
       "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    }
+      price: "0",
+      priceCurrency: "USD",
+    },
+    featureList: [
+      "Download Instagram Reels in 1080p HD",
+      "No watermark on downloaded videos",
+      "No login or account required",
+      "Works on PC, Mac, Android, iOS",
+      "Unlimited free downloads",
+    ],
   };
 
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": [
+    mainEntity: [
       {
         "@type": "Question",
-        "name": "How to download Instagram Reels?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Copy the Instagram Reel link, paste it into AnyClip's input field, and click Download." }
+        name: "How to download Instagram Reels?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Open the Instagram Reel, tap the three dots or 'Share' button, copy the link, paste it into AnyClip, and click Download. The video will be saved directly to your device in HD quality.",
+        },
       },
       {
         "@type": "Question",
-        "name": "Can I download Instagram Reels in HD?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes! AnyClip downloads Instagram Reels in the highest available quality, typically 1080p Full HD." }
+        name: "Can I download Instagram Reels in 1080p HD quality?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes! AnyClip downloads Instagram Reels in the highest available quality, typically 1080p Full HD MP4. The original resolution and audio are preserved without compression.",
+        },
       },
       {
         "@type": "Question",
-        "name": "Is it free to use?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes, AnyClip is completely free with no hidden charges. Download unlimited Instagram videos." }
-      }
-    ]
+        name: "Is downloading Instagram Reels free?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes, AnyClip is completely free with no hidden charges, no subscriptions, and no download limits. Save unlimited Instagram Reels at no cost.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Do I need to install any app to download Reels?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "No. AnyClip works entirely in your browser. No app installation needed — just visit the website, paste the link, and download.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Can I download Reels without watermark?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes, AnyClip saves Instagram Reels without any added watermark. You get the original video exactly as uploaded by the creator.",
+        },
+      },
+    ],
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://reels.sayan.studio",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Instagram Reel Downloader",
+        item: "https://reels.sayan.studio/instagram-downloader",
+      },
+    ],
   };
 
   return (
-    <div className="flex flex-col items-center" id="top">
-      <Script id="json-ld-app" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <Script id="json-ld-faq" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      
-      {/* Hero + Downloader */}
-      <section className="w-full py-12 md:py-16 bg-gradient-to-b from-pink-50 via-purple-50/30 to-white">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <div className="text-center mb-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-pink-100/80 text-pink-700 text-sm font-medium mb-6 border border-pink-200">
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-              Reels • IGTV • Videos • Photos
-            </div>
-            <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-slate-900">
-              Instagram <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600">Downloader</span>
-            </h1>
-            <p className="text-lg text-slate-600 max-w-xl mx-auto">
-              Download high-quality Instagram Reels, Videos and Photos instantly. Free, fast, and no login required.
-            </p>
+    <>
+      <Script
+        id="json-ld-app"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <Script
+        id="json-ld-faq"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <Script
+        id="json-ld-breadcrumb"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+
+      <Suspense
+        fallback={
+          <div className="w-full min-h-[60vh] flex items-center justify-center">
+            <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-pink-500" />
           </div>
-          <DownloaderClient 
-            endpoint="/api/download/instagram" 
-            placeholder="Paste Instagram URL here (e.g., https://www.instagram.com/reel/...)" 
-          />
-        </div>
-      </section>
-
-      {/* How to Download Section */}
-      <HowToDownload platform="instagram" />
-
-      {/* Blog Section */}
-      <BlogSection platform="instagram" />
-    </div>
+        }
+      >
+        <InstagramDownloaderView />
+      </Suspense>
+    </>
   );
 }

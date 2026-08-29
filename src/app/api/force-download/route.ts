@@ -46,26 +46,62 @@ export async function GET(req: NextRequest) {
       );
     }
 
+    const requestedFilename = req.nextUrl.searchParams.get("filename");
+    const mediaType = req.nextUrl.searchParams.get("type"); // "image" | "video" | "audio" | "photo"
+    const upstreamContentType = upstream.headers.get("content-type") || "";
+
+    // Determine appropriate Content-Type and extension
+    let resolvedContentType = upstreamContentType;
+    let defaultExt = "mp4";
+
+    if (
+      mediaType === "image" ||
+      mediaType === "photo" ||
+      upstreamContentType.startsWith("image/")
+    ) {
+      resolvedContentType = upstreamContentType || "image/jpeg";
+      defaultExt = upstreamContentType.includes("png")
+        ? "png"
+        : upstreamContentType.includes("webp")
+        ? "webp"
+        : "jpg";
+    } else if (
+      mediaType === "audio" ||
+      upstreamContentType.startsWith("audio/")
+    ) {
+      resolvedContentType = upstreamContentType || "audio/mpeg";
+      defaultExt = "mp3";
+    } else {
+      resolvedContentType = upstreamContentType || "video/mp4";
+      defaultExt = upstreamContentType.includes("webm") ? "webm" : "mp4";
+    }
+
     // ── Build response headers ───────────────────────────────────────
     const headers = new Headers();
+    headers.set("Content-Type", resolvedContentType);
 
-    // Content-Type: use upstream value or fall back to a safe binary type
-    headers.set(
-      "Content-Type",
-      upstream.headers.get("content-type") || "video/mp4"
-    );
-
-    // Content-Length: forward it if the upstream provides it so
-    // the browser can show a proper download progress bar
+    // Content-Length: forward it if the upstream provides it
     const contentLength = upstream.headers.get("content-length");
     if (contentLength) {
       headers.set("Content-Length", contentLength);
     }
 
+    // Build clean filename
+    const safeFilename =
+      requestedFilename && requestedFilename.trim()
+        ? requestedFilename.trim().replace(/[^a-zA-Z0-9._-]/g, "_")
+        : `AnyClip-${
+            mediaType === "photo" || mediaType === "image"
+              ? "Photo"
+              : mediaType === "audio"
+              ? "Audio"
+              : "Media"
+          }-${Date.now()}.${defaultExt}`;
+
     // Force the browser to download instead of playing inline
     headers.set(
       "Content-Disposition",
-      `attachment; filename="AnyClip-Video-${Date.now()}.mp4"`
+      `attachment; filename="${safeFilename}"`
     );
 
     // ── Stream the body directly — no buffering ──────────────────────
