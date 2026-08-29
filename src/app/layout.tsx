@@ -76,7 +76,7 @@ export const metadata: Metadata = {
     description: "Download videos from Instagram, Facebook, and YouTube for free in HD. No login required.",
   },
   verification: {
-    google: "gDXgFmsT_8VF3VN_VU3voKmc24eL9-Fqv6vukd1kzy8",
+    google: "GrIAmr3MK_kKKCefsH-l5nkmk9Yb7XAeyygDtp6sH5k",
   },
 };
 

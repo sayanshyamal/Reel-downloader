@@ -81,13 +81,13 @@ interface InstagramDownloaderViewProps {
 }
 
 export default function InstagramDownloaderView({
-  defaultTab,
+  defaultTab = "reel",
 }: InstagramDownloaderViewProps = {}) {
   const searchParams = useSearchParams();
   const initialType =
     (searchParams.get("type") as InstagramTabType) || defaultTab || "reel";
   const [activeTab, setActiveTab] = useState<InstagramTabType>(
-    TAB_CONFIGS[initialType] ? initialType : "reel"
+    TAB_CONFIGS[initialType] ? initialType : defaultTab
   );
 
   useEffect(() => {
