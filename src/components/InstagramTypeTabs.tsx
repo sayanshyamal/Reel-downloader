@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { Film, Image as ImageIcon, Clock, Video, Music } from "lucide-react";
 
 export type InstagramTabType = "reel" | "story" | "photo" | "video" | "audio";
@@ -10,7 +11,7 @@ interface TabItem {
   label: string;
   badge?: string;
   icon: React.ComponentType<{ className?: string }>;
-  gradient: string;
+  href: string;
   activeBg: string;
   borderActive: string;
 }
@@ -21,7 +22,7 @@ const TABS: TabItem[] = [
     label: "Reels",
     badge: "1080p",
     icon: Film,
-    gradient: "from-pink-500 to-rose-500",
+    href: "/instagram-downloader",
     activeBg: "bg-pink-50 text-pink-700",
     borderActive: "border-pink-300 shadow-pink-100",
   },
@@ -30,7 +31,7 @@ const TABS: TabItem[] = [
     label: "Story",
     badge: "Anonymous",
     icon: Clock,
-    gradient: "from-amber-500 to-orange-500",
+    href: "/instagram-story-downloader",
     activeBg: "bg-amber-50 text-amber-700",
     borderActive: "border-amber-300 shadow-amber-100",
   },
@@ -39,7 +40,7 @@ const TABS: TabItem[] = [
     label: "Photo",
     badge: "Original HD",
     icon: ImageIcon,
-    gradient: "from-purple-500 to-indigo-500",
+    href: "/instagram-photo-downloader",
     activeBg: "bg-purple-50 text-purple-700",
     borderActive: "border-purple-300 shadow-purple-100",
   },
@@ -47,7 +48,7 @@ const TABS: TabItem[] = [
     id: "video",
     label: "Video",
     icon: Video,
-    gradient: "from-blue-500 to-cyan-500",
+    href: "/instagram-video-downloader",
     activeBg: "bg-blue-50 text-blue-700",
     borderActive: "border-blue-300 shadow-blue-100",
   },
@@ -56,7 +57,7 @@ const TABS: TabItem[] = [
     label: "Audio",
     badge: "MP3",
     icon: Music,
-    gradient: "from-emerald-500 to-teal-500",
+    href: "/instagram-audio-downloader",
     activeBg: "bg-emerald-50 text-emerald-700",
     borderActive: "border-emerald-300 shadow-emerald-100",
   },
@@ -64,7 +65,7 @@ const TABS: TabItem[] = [
 
 interface InstagramTypeTabsProps {
   activeTab: InstagramTabType;
-  onTabChange: (tab: InstagramTabType) => void;
+  onTabChange?: (tab: InstagramTabType) => void;
   className?: string;
 }
 
@@ -81,13 +82,13 @@ export default function InstagramTypeTabs({
           const Icon = tab.icon;
 
           return (
-            <button
+            <Link
               key={tab.id}
-              onClick={() => onTabChange(tab.id)}
-              type="button"
+              href={tab.href}
+              onClick={() => onTabChange?.(tab.id)}
               className={`relative flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 whitespace-nowrap cursor-pointer select-none ${
                 isActive
-                  ? `${tab.activeBg} border ${tab.borderActive} shadow-sm scale-[1.02]`
+                  ? `${tab.activeBg} border ${tab.borderActive} shadow-xs scale-[1.02]`
                   : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 border border-transparent"
               }`}
             >
@@ -108,7 +109,7 @@ export default function InstagramTypeTabs({
                   {tab.badge}
                 </span>
               )}
-            </button>
+            </Link>
           );
         })}
       </div>

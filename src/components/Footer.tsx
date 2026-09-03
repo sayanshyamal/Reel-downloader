@@ -26,6 +26,26 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/instagram-video-downloader" className="hover:text-indigo-400 transition-colors">
+                  Instagram Video Downloader
+                </Link>
+              </li>
+              <li>
+                <Link href="/instagram-photo-downloader" className="hover:text-indigo-400 transition-colors">
+                  Instagram Photo Downloader
+                </Link>
+              </li>
+              <li>
+                <Link href="/instagram-story-downloader" className="hover:text-indigo-400 transition-colors">
+                  Instagram Story Downloader
+                </Link>
+              </li>
+              <li>
+                <Link href="/instagram-audio-downloader" className="hover:text-indigo-400 transition-colors">
+                  Instagram Audio Downloader
+                </Link>
+              </li>
+              <li>
                 <Link href="/facebook-video-downloader" className="hover:text-indigo-400 transition-colors">
                   Facebook Downloader
                 </Link>
@@ -62,6 +82,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/facebook-video-downloader#blog" className="hover:text-indigo-400 transition-colors">
+                  Facebook Download Guide
+                </Link>
+              </li>
+              <li>
                 <Link href="/youtube-video-downloader#blog" className="hover:text-indigo-400 transition-colors">
                   YouTube Download Guide
                 </Link>
@@ -70,21 +95,21 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-white font-semibold mb-4 tracking-wide">Legal</h3>
+            <h3 className="text-white font-semibold mb-4 tracking-wide">Legal &amp; Trust</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="#" className="hover:text-indigo-400 transition-colors">
+                <Link href="/terms" className="hover:text-indigo-400 transition-colors">
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-indigo-400 transition-colors">
+                <Link href="/privacy" className="hover:text-indigo-400 transition-colors">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-indigo-400 transition-colors">
-                  Contact Us
+                <Link href="/contact" className="hover:text-indigo-400 transition-colors">
+                  Contact &amp; DMCA
                 </Link>
               </li>
             </ul>

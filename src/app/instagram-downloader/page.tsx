@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { Suspense } from "react";
 import InstagramDownloaderView from "@/components/InstagramDownloaderView";
-import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Instagram Reels, Story, Photo & Video Downloader — Fast & Free HD",
@@ -83,15 +82,17 @@ export default function InstagramDownloaderPage() {
 
   return (
     <>
-      <Script
-        id="json-ld-app"
+      <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
       />
-      <Script
-        id="json-ld-faq"
+      <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c"),
+        }}
       />
 
       <Suspense

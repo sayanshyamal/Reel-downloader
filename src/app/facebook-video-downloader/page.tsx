@@ -2,32 +2,49 @@ import { Metadata } from "next";
 import DownloaderClient from "@/components/DownloaderClient";
 import HowToDownload from "@/components/HowToDownload";
 import BlogSection from "@/components/BlogSection";
-import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Facebook Video Downloader — Download FB Videos & Reels HD Free",
-  description: "Download Facebook videos and reels instantly in HD quality. No app, no login required. The best free online Facebook video downloader — save any public FB video as MP4.",
+  description:
+    "Download Facebook videos and reels instantly in HD quality. No app, no login required. The best free online Facebook video downloader — save any public FB video as MP4.",
   keywords: [
-    "facebook video downloader", "fb video downloader", "download facebook video",
-    "facebook reel downloader", "fb reel downloader", "download fb video online",
-    "facebook video download online free", "save facebook video",
-    "fb video saver", "download facebook reels", "facebook video downloader HD",
-    "facebook watch downloader", "fb video downloader online free",
-    "download video from facebook", "how to download facebook video",
-    "facebook video download without app", "facebook mp4 downloader",
-    "fb video download 1080p", "best facebook video downloader",
-    "facebook video saver online", "download fb reels",
-    "facebook downloader online", "save fb video to phone",
-    "fb video download kaise kare", "download facebook video free",
-    "facebook video converter mp4", "fb video downloader app alternative",
-    "download facebook watch video", "free fb downloader 2025",
+    "facebook video downloader",
+    "fb video downloader",
+    "download facebook video",
+    "facebook reel downloader",
+    "fb reel downloader",
+    "download fb video online",
+    "facebook video download online free",
+    "save facebook video",
+    "fb video saver",
+    "download facebook reels",
+    "facebook video downloader HD",
+    "facebook watch downloader",
+    "fb video downloader online free",
+    "download video from facebook",
+    "how to download facebook video",
+    "facebook video download without app",
+    "facebook mp4 downloader",
+    "fb video download 1080p",
+    "best facebook video downloader",
+    "facebook video saver online",
+    "download fb reels",
+    "facebook downloader online",
+    "save fb video to phone",
+    "fb video download kaise kare",
+    "download facebook video free",
+    "facebook video converter mp4",
+    "fb video downloader app alternative",
+    "download facebook watch video",
+    "free fb downloader 2025",
   ],
   alternates: {
     canonical: "/facebook-video-downloader",
   },
   openGraph: {
     title: "Facebook Video Downloader — Download FB Videos & Reels HD Free",
-    description: "Download Facebook videos and reels instantly in HD. No app, no login. Best free FB video downloader online.",
+    description:
+      "Download Facebook videos and reels instantly in HD. No app, no login. Best free FB video downloader online.",
     url: "https://reels.sayan.studio/facebook-video-downloader",
   },
 };
@@ -36,51 +53,82 @@ export default function FacebookDownloaderPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "AnyClip Facebook Downloader",
-    "url": "https://reels.sayan.studio/facebook-video-downloader",
-    "applicationCategory": "MultimediaApplication",
-    "operatingSystem": "All",
-    "description": "A free tool to download Facebook videos securely.",
-    "offers": {
+    name: "AnyClip Facebook Downloader",
+    url: "https://reels.sayan.studio/facebook-video-downloader",
+    applicationCategory: "MultimediaApplication",
+    operatingSystem: "All",
+    description: "A free tool to download Facebook videos securely.",
+    offers: {
       "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    }
+      price: "0",
+      priceCurrency: "USD",
+    },
   };
 
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": [
+    mainEntity: [
       {
         "@type": "Question",
-        "name": "How to download Facebook Videos?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Copy the Facebook video link, paste it into AnyClip's input field, and click Download." }
+        name: "How to download Facebook Videos?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Copy the Facebook video link, paste it into AnyClip's input field, and click Download.",
+        },
       },
       {
         "@type": "Question",
-        "name": "Can I download Facebook videos in HD?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes! AnyClip downloads Facebook videos in the highest available quality including 720p and 1080p." }
+        name: "Can I download Facebook videos in HD?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes! AnyClip downloads Facebook videos in the highest available quality including 720p and 1080p.",
+        },
       },
       {
         "@type": "Question",
-        "name": "Can I download from private profiles?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No, only videos from public Facebook posts and pages can be downloaded." }
-      }
-    ]
+        name: "Can I download from private profiles?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "No, only videos from public Facebook posts and pages can be downloaded.",
+        },
+      },
+    ],
   };
 
   return (
     <div className="flex flex-col items-center" id="top">
-      <Script id="json-ld-app-fb" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <Script id="json-ld-faq-fb" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c"),
+        }}
+      />
+
       {/* Hero + Downloader */}
       <section className="w-full py-12 md:py-16 bg-gradient-to-b from-blue-50 via-cyan-50/30 to-white">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-10">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-100/80 text-blue-700 text-sm font-medium mb-6 border border-blue-200">
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                />
+              </svg>
               Videos • Reels • Watch • Live
             </div>
             <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-slate-900">
@@ -90,9 +138,9 @@ export default function FacebookDownloaderPage() {
               Download high-quality Facebook Videos and Reels instantly. Free, fast, and no account needed.
             </p>
           </div>
-          <DownloaderClient 
-            endpoint="/api/download/facebook" 
-            placeholder="Paste Facebook Video URL here (e.g., https://www.facebook.com/...)" 
+          <DownloaderClient
+            endpoint="/api/download/facebook"
+            placeholder="Paste Facebook Video URL here (e.g., https://www.facebook.com/...)"
           />
         </div>
       </section>

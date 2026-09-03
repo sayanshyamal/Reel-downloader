@@ -99,6 +99,17 @@ export default function InstagramDownloaderView({
 
   const currentConfig = TAB_CONFIGS[activeTab] || TAB_CONFIGS.reel;
 
+  const platformType =
+    activeTab === "video"
+      ? "instagram-video"
+      : activeTab === "photo"
+      ? "instagram-photo"
+      : activeTab === "story"
+      ? "instagram-story"
+      : activeTab === "audio"
+      ? "instagram-audio"
+      : "instagram";
+
   return (
     <div className="flex flex-col items-center w-full" id="top">
       {/* Hero Section */}
@@ -153,10 +164,10 @@ export default function InstagramDownloaderView({
       </section>
 
       {/* How to Download Section */}
-      <HowToDownload platform="instagram" />
+      <HowToDownload platform={platformType} />
 
       {/* Blog Section */}
-      <BlogSection platform="instagram" />
+      <BlogSection platform={platformType} />
     </div>
   );
 }
